@@ -12,7 +12,7 @@ const users = {
   },
 
   "ojie@devimandiri.com": {
-    password: "ludahibiarlicin",
+    password: "ojie2026",
     role: "zona" // hanya KRP ZONA
   }
 };
