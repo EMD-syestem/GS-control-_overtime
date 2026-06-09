@@ -12,8 +12,8 @@ const users = {
   },
 
   "ojie@devimandiri.com": {
-    password: "ludahibiarlicin",
-    role: "ojie2026" // hanya KRP ZONA
+    password: "ojie2026",
+    role: "zona" // hanya KRP ZONA
   }
 };
 
