@@ -1,20 +1,24 @@
- <html lang="id">
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>GS control overtime</title>
+    <link rel="stylesheet" href="./style.css">
+
+  </head>
+    
+  <body>
+  <!DOCTYPE html>
+<html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Control Vehicle Timesheet Form</title>
+  <meta charset="UTF-8">
 
-<link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-
-   <!-- ✅ Favicon untuk Browser, Mobile, dan Desktop -->
-  <link rel="icon" type="image/png" sizes="16x16" href="https://i.postimg.cc/NMRDPgT5/GS-dispacer.jpg">
-  <link rel="icon" type="image/png" sizes="32x32" href="https://i.postimg.cc/NMRDPgT5/GS-dispacer.jpg">
-  <link rel="icon" type="image/png" sizes="48x48" href="https://i.postimg.cc/NMRDPgT5/GS-dispacer.jpg">
-  <link rel="icon" type="image/png" sizes="64x64" href="https://i.postimg.cc/NMRDPgT5/GS-dispacer.jpg">
-  <link rel="icon" type="image/png" sizes="180x180" https://i.postimg.cc/NMRDPgT5/GS-dispacer.jpg">
-  <link rel="shortcut icon" href="https://i.postimg.cc/NMRDPgT5/GS-dispacer.jpg" type="image/png">
+  <title>Control Vehicle Timesheet Form</title>
 
 </head>
 
@@ -896,89 +900,100 @@
 
           <!-- ================= DROPDOWN DRIVER ================= -->
 
-          <select id="driverSelect" onchange="generateDriverChart()" style="
-        padding:10px;
-        margin-bottom:20px;
-        border-radius:8px;
-        width:300px;
-      ">
+          <div class="driver-header">
 
-            <option value="">
-              -- Pilih Driver --
-            </option>
+  <div class="driver-select-box">
+    <select id="driverSelect"
+      onchange="loadDriverPhoto(); generateDriverChart();">
 
-            <!-- ================= KRP FIELD ================= -->
+              <!-- ================= KRP FIELD ================= -->
 
-            <option class="krp-field" value="Aang Septiansyah">Aang Septiansyah</option>
-            <option class="krp-field" value="Ade Trio Saputra">Ade Trio Saputra</option>
-            <option class="krp-field" value="Ahmad Safii">Ahmad Safii</option>
-            <option class="krp-field" value="Andi Susilo">Andi Susilo</option>
-            <option class="krp-field" value="Andrian Abel Pratama">Andrian Abel Pratama</option>
-            <option class="krp-field" value="Bayu Hermansyah">Bayu Hermansyah</option>
-            <option class="krp-field" value="Cristiandi Saputra">Cristiandi Saputra</option>
-            <option class="krp-field" value="Deden krishna">Deden krishna</option>
-            <option class="krp-field" value="Dedi Kurniawan.">Dedi Kurniawan.</option>
-            <option class="krp-field" value="Dimas Anggriawan">Dimas Anggriawan</option>
-            <option class="krp-field" value="Dimas Kurnia Pamungkas">Dimas Kurnia Pamungkas</option>
-            <option class="krp-field" value="Dody Friadi">Dody Friady</option>
-            <option class="krp-field" value="Edo Irfan Nugraha">Edo Irfan Nugraha</option>
-            <option class="krp-field" value="Eggi Fradana">Eggi Fradana</option>
-            <option class="krp-field" value="Gusef Riadi">Gusef Riadi</option>
-            <option class="krp-field" value="Hafid">Hafid</option>
-            <option class="krp-field" value="Hamdani">Hamdani</option>
-            <option class="krp-field" value="Hari Bowo">Hari Bowo</option>
-            <option class="krp-field" value="Ilham Kholik">Ilham Kholik</option>
-            <option class="krp-field" value="Kodin">Kodin</option>
-            <option class="krp-field" value="Kuswara">Kuswara</option>
-            <option class="krp-field" value="Latif">Latif</option>
-            <option class="krp-field" value="Riko fristian">Riko fristian</option>
-            <option class="krp-field" value="Muhammad Rivaldi">Muhammad Rivaldi</option>
-            <option class="krp-field" value="Niko Nirwana">Niko Nirwana</option>
-            <option class="krp-field" value="Nur Fatonah">Nur Fatonah</option>
-            <option class="krp-field" value="Nurhidayattullah">Nurhidayattullah</option>
-            <option class="krp-field" value="Oki">Oki</option>
-            <option class="krp-field" value="Primulyadi">Primulyadi</option>
-            <option class="krp-field" value="Rahmat Syukur Pratama">Rahmat Syukur Pratama</option>
-            <option class="krp-field" value="Ravi Anggara">Ravi Anggara</option>
-            <option class="krp-field" value="Restu Satrio">Restu Satrio</option>
-            <option class="krp-field" value="Reza Kurniadi">Reza Kurniadi</option>
-            <option class="krp-field" value="Said Ahmad Taufik">Said Ahmad Taufik</option>
-            <option class="krp-field" value="Sandro">Sandro</option>
-            <option class="krp-field" value="Suryadi">Jaswadi</option>
-            <option class="krp-field" value="Taufik Hidayat">Taufik Hidayat</option>
-            <option class="krp-field" value="Trisnanto">Trisnanto</option>
-            <option class="krp-field" value="Usman Deva">Usman Deva</option>
-            <option class="krp-field" value="Wahyu Ilham">Wahyu Ilham</option>
-            <option class="krp-field" value="Wilfridus Krisna Priadika">Wilfridus Krisna Priadika</option>
-            <option class="krp-field" value="Audi muhar sakti">Audi muhar sakti</option>
-            <option class="krp-field" value="Andika saputra">Andika saputra</option>
-            <!-- ================= KRP Zona ================= -->
+              <option class="krp-field" value="Aang Septiansyah">Aang Septiansyah</option>
+              <option class="krp-field" value="Ade Trio Saputra">Ade Trio Saputra</option>
+              <option class="krp-field" value="Ahmad Safii">Ahmad Safii</option>
+              <option class="krp-field" value="Andi Susilo">Andi Susilo</option>
+              <option class="krp-field" value="Andrian Abel Pratama">Andrian Abel Pratama</option>
+              <option class="krp-field" value="Bayu Hermansyah">Bayu Hermansyah</option>
+              <option class="krp-field" value="Cristiandi Saputra">Cristiandi Saputra</option>
+              <option class="krp-field" value="Deden krishna">Deden krishna</option>
+              <option class="krp-field" value="Dedi Kurniawan.">Dedi Kurniawan.</option>
+              <option class="krp-field" value="Dimas Anggriawan">Dimas Anggriawan</option>
+              <option class="krp-field" value="Dimas Kurnia Pamungkas">Dimas Kurnia Pamungkas</option>
+              <option class="krp-field" value="Dody Friady">Dody Friady</option>
+              <option class="krp-field" value="Edo Irfan Nugraha">Edo Irfan Nugraha</option>
+              <option class="krp-field" value="Eggi Fradana">Eggi Fradana</option>
+              <option class="krp-field" value="Gusef Riadi">Gusef Riadi</option>
+              <option class="krp-field" value="Hafid">Hafid</option>
+              <option class="krp-field" value="Hamdani">Hamdani</option>
+              <option class="krp-field" value="Hari Bowo">Hari Bowo</option>
+              <option class="krp-field" value="Ilham Kholik">Ilham Kholik</option>
+              <option class="krp-field" value="Kodin">Kodin</option>
+              <option class="krp-field" value="Kuswara">Kuswara</option>
+              <option class="krp-field" value="Latif">Latif</option>
+              <option class="krp-field" value="Riko fristian">Riko fristian</option>
+              <option class="krp-field" value="Muhammad Rivaldi">Muhammad Rivaldi</option>
+              <option class="krp-field" value="Niko Nirwana">Niko Nirwana</option>
+              <option class="krp-field" value="Nur Fatonah">Nur Fatonah</option>
+              <option class="krp-field" value="Nurhidayattullah">Nurhidayattullah</option>
+              <option class="krp-field" value="Oki">Oki</option>
+              <option class="krp-field" value="Primulyadi">Primulyadi</option>
+              <option class="krp-field" value="Rahmat Syukur Pratama">Rahmat Syukur Pratama</option>
+              <option class="krp-field" value="Ravi Anggara">Ravi Anggara</option>
+              <option class="krp-field" value="Restu Satrio">Restu Satrio</option>
+              <option class="krp-field" value="Reza Kurniadi">Reza Kurniadi</option>
+              <option class="krp-field" value="Said Ahmad Taufik">Said Ahmad Taufik</option>
+              <option class="krp-field" value="Sandro">Sandro</option>
+              <option class="krp-field" value="Suryadi">Jaswadi</option>
+              <option class="krp-field" value="Taufik Hidayat">Taufik Hidayat</option>
+              <option class="krp-field" value="Trisnanto">Trisnanto</option>
+              <option class="krp-field" value="Usman Deva">Usman Deva</option>
+              <option class="krp-field" value="Wahyu Ilham">Wahyu Ilham</option>
+              <option class="krp-field" value="Wilfridus Krisna Priadika">Wilfridus Krisna Priadika</option>
+              <option class="krp-field" value="Audi muhar sakti">Audi muhar sakti</option>
+              <option class="krp-field" value="Andika saputra">Andika saputra</option>
+              <!-- ================= KRP Zona ================= -->
 
-            <option class="krp-zona" value="Aris Saputra">Aris Saputra</option>
-            <option class="krp-zona" value="Ade Lutfi">Ade Lutfi</option>
-            <option class="krp-zona" value="Adi Subroto">Adi Subroto</option>
-            <option class="krp-zona" value="Ardiansyah">Ardiansyah</option>
-            <option class="krp-zona" value="Dedi Kurniawan">Dedi Kurniawan</option>
-            <option class="krp-zona" value="Edi Nofrizal">Edi Nofrizal</option>
-            <option class="krp-zona" value="Febri Yenita Pratama">Febri Yenita Pratama</option>
-            <option class="krp-zona" value="Hendra Saputra">Hendra Saputra</option>
-            <option class="krp-zona" value="Iman Surya Priyatna">Iman Surya Priyatna</option>
-            <option class="krp-zona" value="Irwanto">Irwanto</option>
-            <option class="krp-zona" value="Junianto">Junianto</option>
-            <option class="krp-zona" value="Madelian Herianto">Madelian Herianto</option>
-            <option class="krp-zona" value="M Ridwan">M Ridwan</option>
-            <option class="krp-zona" value="M Hafiz">M Hafiz</option>
-            <option class="krp-zona" value="May Yudi Supratman">May Yudi Supratman</option>
-            <option class="krp-zona" value="Rendy Septirianto">Rendy Septirianto</option>
-            <option class="krp-zona" value="Rizkho Fadjar Mulyawan">Rizkho Fadjar Mulyawan</option>
-            <option class="krp-zona" value="Satri Mulyanak S">Satri Mulyanak S</option>
-            <option class="krp-zona" value="Satria Ariansyah">Satria Ariansyah</option>
-            <option class="krp-zona" value="Suyadi">Suyadi</option>
-            <option class="krp-zona" value="Syafarudin">Syafarudin</option>
-            <option class="krp-zona" value="Tri Darsa Saputra">Tri Darsa Saputra</option>
+              <option class="krp-zona" value="Aris Saputra">Aris Saputra</option>
+              <option class="krp-zona" value="Ade Lutfi">Ade Lutfi</option>
+              <option class="krp-zona" value="Adi Subroto">Adi Subroto</option>
+              <option class="krp-zona" value="Ardiansyah">Ardiansyah</option>
+              <option class="krp-zona" value="Dedi Kurniawan">Dedi Kurniawan</option>
+              <option class="krp-zona" value="Edi Nofrizal">Edi Nofrizal</option>
+              <option class="krp-zona" value="Febri Yenita Pratama">Febri Yenita Pratama</option>
+              <option class="krp-zona" value="Hendra Saputra">Hendra Saputra</option>
+              <option class="krp-zona" value="Iman Surya Priyatna">Iman Surya Priyatna</option>
+              <option class="krp-zona" value="Irwanto">Irwanto</option>
+              <option class="krp-zona" value="Junianto">Junianto</option>
+              <option class="krp-zona" value="Madelian Herianto">Madelian Herianto</option>
+              <option class="krp-zona" value="M Ridwan">M Ridwan</option>
+              <option class="krp-zona" value="M Hafiz">M Hafiz</option>
+              <option class="krp-zona" value="May Yudi Supratman">May Yudi Supratman</option>
+              <option class="krp-zona" value="Rendy Septirianto">Rendy Septirianto</option>
+              <option class="krp-zona" value="Rizkho Fadjar Mulyawan">Rizkho Fadjar Mulyawan</option>
+              <option class="krp-zona" value="Satri Mulyanak S">Satri Mulyanak S</option>
+              <option class="krp-zona" value="Satria Ariansyah">Satria Ariansyah</option>
+              <option class="krp-zona" value="Suyadi">Suyadi</option>
+              <option class="krp-zona" value="Syafarudin">Syafarudin</option>
+              <option class="krp-zona" value="Tri Darsa Saputra">Tri Darsa Saputra</option>
 
-          </select>
+            </select>
 
+            </div>
+
+  <div class="driver-profile-card">
+
+    <img
+      id="driverPhoto"
+      src="https://i.postimg.cc/NMRDPgT5/GS-dispacer.jpg"
+      alt="Driver Photo">
+
+    <div id="driverPhotoName">
+      Pilih Driver
+    </div>
+
+  </div>
+
+</div>
           <!-- ================= CHART ================= -->
 
           <div class="chart-wrapper">

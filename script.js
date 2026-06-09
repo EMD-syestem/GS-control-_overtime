@@ -12,7 +12,7 @@ const users = {
   },
 
   "ojie@devimandiri.com": {
-    password: "ojie2026",
+    password: "ludahibiarlicin",
     role: "zona" // hanya KRP ZONA
   }
 };
@@ -789,24 +789,24 @@ function showSection(sectionId) {
 
     const role = localStorage.getItem("userRole") || "admin";
 
-    if (!select.value) {
-      let firstOption = null;
+    let firstOption = null;
 
-      if (role === "field") {
-        firstOption = select.querySelector("option.krp-field");
-      } else if (role === "zona") {
-        firstOption = select.querySelector("option.krp-zona");
-      } else {
-        firstOption = select.querySelector("option[value]:not([value=''])");
-      }
+    if (role === "field") {
+      firstOption = select.querySelector("option.krp-field");
+    } else if (role === "zona") {
+      firstOption = select.querySelector("option.krp-zona");
+    } else {
+      firstOption = select.querySelector("option[value]:not([value=''])");
+    }
 
-      if (firstOption) {
-        select.value = firstOption.value;
-      }
+    if (firstOption) {
+      select.value = firstOption.value;
     }
 
     console.log("Role:", role);
     console.log("Driver default:", select.value);
+
+    loadDriverPhoto();
 
     generateDriverChart();
   }
@@ -2852,6 +2852,90 @@ function generateOvertimeChart(startDate = null, endDate = null) {
       console.error("❌ Gagal load chart:", err);
     });
 }
+/* ================= BIODATA DRIVER ================= */
+let biodataReady = false;
+let biodataDriver = [];
+
+window.addEventListener("load", loadDriverBiodata);
+
+function loadDriverBiodata() {
+  fetch(
+    "https://script.google.com/macros/s/AKfycbxo_XzunHS3-7f959z3zlpCXtyAt-koWb2KSm8OiMGtVIc9Nv08t_0xUOhSGAVs9eMF/exec?action=readBiodata"
+  )
+    .then((res) => res.json())
+    .then((data) => {
+      biodataDriver = data;
+      biodataReady = true;
+
+      console.log("Biodata Driver Loaded:", biodataDriver.length);
+    })
+    .catch((err) => {
+      console.error("Gagal load biodata:", err);
+    });
+}
+
+/* ================= LOAD FOTO DRIVER ================= */
+
+function loadDriverPhoto() {
+  const selectedDriver = document.getElementById("driverSelect").value;
+
+  const img = document.getElementById("driverPhoto");
+
+  const nama = document.getElementById("driverPhotoName");
+
+  console.log("Jumlah Biodata:", biodataDriver.length);
+  console.log("Driver Dipilih:", selectedDriver);
+
+  if (!selectedDriver) {
+    img.src = "https://via.placeholder.com/240x320?text=Driver";
+
+    nama.textContent = "Pilih Driver";
+
+    return;
+  }
+
+  console.log("Driver dipilih:", selectedDriver);
+
+  biodataDriver.forEach((row, i) => {
+    console.log(i, "Nama Sheet:", row.nama);
+  });
+
+  const driver = biodataDriver.find((row) => {
+    const namaSheet = (row.nama || "")
+      .toString()
+      .trim()
+      .replace(/\s+/g, " ")
+      .toLowerCase();
+
+    const namaDropdown = selectedDriver
+      .toString()
+      .trim()
+      .replace(/\s+/g, " ")
+      .toLowerCase();
+
+    console.log("Bandingkan:", namaSheet, "===", namaDropdown);
+
+    return namaSheet === namaDropdown;
+  });
+
+  console.log("Driver ditemukan:", driver);
+
+  if (driver) {
+    img.src =
+      driver.photo || "https://via.placeholder.com/240x320?text=No+Photo";
+
+    nama.textContent = driver.nama;
+  } else {
+    img.src = "https://via.placeholder.com/240x320?text=No+Photo";
+
+    nama.textContent = "Photo Tidak Ditemukan";
+  }
+}
+console.log("Data Pertama:", biodataDriver[0]);
+console.log(
+  "Semua Nama Biodata:",
+  biodataDriver.map((x) => x.nama)
+);
 window.addEventListener("load", loadCurrentMonthChart);
 /* ================= GLOBAL DRIVER CHART ================= */
 
