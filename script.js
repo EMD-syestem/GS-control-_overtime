@@ -743,6 +743,8 @@ function showSection(sectionId) {
   document.getElementById("formSection").style.display = "none";
 
   document.getElementById("dinasLuarSection").style.display = "none";
+  
+  document.getElementById("reportDinasLuarSection").style.display = "none";
 
   document.getElementById("reportSection").style.display = "none";
 
@@ -763,6 +765,10 @@ function showSection(sectionId) {
   if (sectionId === "reportSection") {
     loadReport();
   }
+  
+  if (sectionId === "reportDinasLuarSection") {
+  loadReportDinasLuar();
+}
 
   /* ================= LOAD MONTHLY ================= */
 
@@ -811,6 +817,70 @@ function showSection(sectionId) {
     generateDriverChart();
   }
 }
+
+function formatTanggal(dateValue) {
+
+  if (!dateValue) return "";
+
+  const date = new Date(dateValue);
+
+  return date.toLocaleDateString(
+    "id-ID",
+    {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric"
+    }
+  );
+
+}
+
+function loadReportDinasLuar() {
+
+  const role =
+    localStorage.getItem("userRole") || "admin";
+
+  fetch(
+    `https://script.google.com/macros/s/AKfycbxo_XzunHS3-7f959z3zlpCXtyAt-koWb2KSm8OiMGtVIc9Nv08t_0xUOhSGAVs9eMF/exec?action=readDinasLuar&role=${role}`
+  )
+
+  .then(res => res.json())
+
+  .then(data => {
+
+    const tbody =
+      document.getElementById(
+        "reportDinasLuarBody"
+      );
+
+    tbody.innerHTML = "";
+
+    data.forEach(row => {
+
+      tbody.innerHTML += `
+        <tr>
+          <td>${row[0] || ""}</td>
+          <td>${formatTanggal(row[1])}</td>
+          <td>${row[2] || ""}</td>
+          <td>${row[3] || ""}</td>
+        </tr>
+      `;
+
+    });
+
+  })
+
+  .catch(err => {
+
+    console.error(
+      "Gagal load dinas luar:",
+      err
+    );
+
+  });
+
+}
+
 /* ================= LOAD REPORT ================= */
 
 function loadReport() {
