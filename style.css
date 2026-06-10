@@ -431,13 +431,13 @@ body {
 .header-links a {
   text-decoration: none;
 
-  padding: 8px 16px;
+  padding: 5px 14px;
 
-  border-radius: 10px;
+  border-radius: 8px;
 
   color: white;
 
-  font-size: 14px;
+  font-size: 13px;
 
   font-weight: 600;
 
@@ -445,9 +445,8 @@ body {
 
   backdrop-filter: blur(5px);
 
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
 }
-
 /* ================= WARNA BERBEDA ================= */
 
 .header-links a:nth-child(1) {
@@ -1023,7 +1022,12 @@ body {
 
   z-index: 10;
 
-  background: #7fb77e;
+  background:linear-gradient(
+    135deg,
+    #5c8d59,
+    #4a7c59
+  );
+  
 
   color: white;
 
@@ -1744,4 +1748,64 @@ body {
     margin-top:10px;
   }
 
+}
+
+#reportDinasLuarSection{
+  padding:20px;
+}
+
+#reportDinasLuarSection .table-wrapper{
+  width:100%;
+  overflow-x:auto;
+  background:#fff;
+  border-radius:12px;
+  box-shadow:0 4px 12px rgba(0,0,0,.08);
+}
+
+#reportDinasLuarSection table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:700px;
+}
+
+#reportDinasLuarSection th{
+  background:linear-gradient(
+    135deg,
+    #5c8d59,
+    #4a7c59
+  );
+  color:#fff;
+  padding:12px;
+  text-align:center;
+  font-weight:600;
+  white-space:nowrap;
+}
+
+#reportDinasLuarSection td{
+  padding:10px;
+  border-bottom:1px solid #e5e7eb;
+  text-align:center;
+}
+
+#reportDinasLuarSection tbody tr:nth-child(even){
+  background:#f8fbf8;
+}
+
+#reportDinasLuarSection tbody tr:hover{
+  background:#e8f5e9;
+  transition:.2s;
+}
+
+#reportDinasLuarSection table{
+  border-radius:12px;
+  overflow:hidden;
+}
+
+#reportDinasLuarSection::-webkit-scrollbar{
+  height:8px;
+}
+
+#reportDinasLuarSection::-webkit-scrollbar-thumb{
+  background:#5c8d59;
+  border-radius:10px;
 }
