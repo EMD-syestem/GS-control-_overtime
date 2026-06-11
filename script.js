@@ -1,13 +1,38 @@
 /* ====== LOGIN / LOGOUT REVISED (FINAL + DASHBOARD ACTIVE + USER PHOTO) ====== */
 
 const users = {
-  "generalservice@pertamina.com": {
-    password: "gs2026",
+  "derihanggara86@gmail.com": {
+    password: "embun2017",
+    role: "admin" // bisa buka semua
+  },
+  
+  "suharso@pertamina.com": {
+    password: "acok2026",
+    role: "admin" // bisa buka semua
+  },
+  
+  "anggito@pertamina.com": {
+    password: "gito2026",
     role: "admin" // bisa buka semua
   },
 
   "caesar@devimandiri.com": {
     password: "cs2026",
+    role: "field" // hanya KRP FIELD
+  },
+  
+   "syahrul@devimandiri.com": {
+    password: "syahrul2026",
+    role: "field" // hanya KRP FIELD
+  },
+  
+   "revino@devimandiri.com": {
+    password: "vino2026",
+    role: "field" // hanya KRP FIELD
+  },
+  
+   "rahmat@devimandiri.com": {
+    password: "rahmat2026",
     role: "field" // hanya KRP FIELD
   },
 
@@ -21,7 +46,13 @@ const users = {
 const userPhotos = {
   "generalservice@pertamina.com": "https://i.postimg.cc/qR1C6dWC/silvia.png",
   "caesar@devimandiri.com": "https://i.postimg.cc/wBg2ZtdS/admint.jpg",
-  "ojie@devimandiri.com": "https://i.postimg.cc/wBg2ZtdS/admint.jpg"
+  "ojie@devimandiri.com": "https://i.postimg.cc/wBg2ZtdS/admint.jpg",
+  "suharso@pertamina.com": "https://i.postimg.cc/wBg2ZtdS/admint.jpg",
+  "anggito@pertamina.com": "https://i.postimg.cc/wBg2ZtdS/admint.jpg",
+  "syahrul@devimandiri.com": "https://i.postimg.cc/wBg2ZtdS/admint.jpg",
+  "revino@devimandiri.com": "https://i.postimg.cc/wBg2ZtdS/admint.jpg",
+  "rahmat@devimandiri.com": "https://i.postimg.cc/wBg2ZtdS/admint.jpg"
+ 
 };
 
 function applyRole(role) {
@@ -665,7 +696,7 @@ function hitungLembur() {
   };
 
   fetch(
-    "https://script.google.com/macros/s/AKfycbxo_XzunHS3-7f959z3zlpCXtyAt-koWb2KSm8OiMGtVIc9Nv08t_0xUOhSGAVs9eMF/exec",
+    "https://script.google.com/macros/s/AKfycbwIVSGk_UTCda3kZbwTlGpAITka0rxTZeGu_W0kh0kA9AV7Oup32sYmqau52_7njRJ4/exec",
     {
       method: "POST",
       body: JSON.stringify(data)
@@ -841,7 +872,7 @@ function loadReportDinasLuar() {
     localStorage.getItem("userRole") || "admin";
 
   fetch(
-    `https://script.google.com/macros/s/AKfycbxo_XzunHS3-7f959z3zlpCXtyAt-koWb2KSm8OiMGtVIc9Nv08t_0xUOhSGAVs9eMF/exec?action=readDinasLuar&role=${role}`
+    `https://script.google.com/macros/s/AKfycbwIVSGk_UTCda3kZbwTlGpAITka0rxTZeGu_W0kh0kA9AV7Oup32sYmqau52_7njRJ4/exec?action=readDinasLuar&role=${role}`
   )
 
   .then(res => res.json())
@@ -889,7 +920,7 @@ function loadReport() {
   console.log("ROLE:", role);
 
   fetch(
-    `https://script.google.com/macros/s/AKfycbxo_XzunHS3-7f959z3zlpCXtyAt-koWb2KSm8OiMGtVIc9Nv08t_0xUOhSGAVs9eMF/exec?action=readWithRow&role=${role}`
+    `https://script.google.com/macros/s/AKfycbwIVSGk_UTCda3kZbwTlGpAITka0rxTZeGu_W0kh0kA9AV7Oup32sYmqau52_7njRJ4/exec?action=readWithRow&role=${role}`
   )
     .then((response) => response.json())
 
@@ -991,7 +1022,7 @@ function deleteReport(rowNumber) {
   if (!konfirmasi) return;
 
   fetch(
-    `https://script.google.com/macros/s/AKfycbxo_XzunHS3-7f959z3zlpCXtyAt-koWb2KSm8OiMGtVIc9Nv08t_0xUOhSGAVs9eMF/exec?action=delete&row=${rowNumber}`
+    `https://script.google.com/macros/s/AKfycbwIVSGk_UTCda3kZbwTlGpAITka0rxTZeGu_W0kh0kA9AV7Oup32sYmqau52_7njRJ4/exec?action=delete&row=${rowNumber}`
   )
     .then((response) => response.json())
     .then((result) => {
@@ -1021,7 +1052,7 @@ function filterTanggal() {
   const role = localStorage.getItem("userRole") || "admin";
 
   fetch(
-    `https://script.google.com/macros/s/AKfycbxo_XzunHS3-7f959z3zlpCXtyAt-koWb2KSm8OiMGtVIc9Nv08t_0xUOhSGAVs9eMF/exec?action=read&role=${role}`
+    `https://script.google.com/macros/s/AKfycbwIVSGk_UTCda3kZbwTlGpAITka0rxTZeGu_W0kh0kA9AV7Oup32sYmqau52_7njRJ4/exec?action=read&role=${role}`
   )
     .then((response) => response.json())
 
@@ -1368,7 +1399,7 @@ function filterMonthlyReport() {
   const role = localStorage.getItem("userRole") || "admin";
 
   fetch(
-    `https://script.google.com/macros/s/AKfycbxo_XzunHS3-7f959z3zlpCXtyAt-koWb2KSm8OiMGtVIc9Nv08t_0xUOhSGAVs9eMF/exec?action=read&role=${role}`
+    `https://script.google.com/macros/s/AKfycbwIVSGk_UTCda3kZbwTlGpAITka0rxTZeGu_W0kh0kA9AV7Oup32sYmqau52_7njRJ4/exec?action=read&role=${role}`
   )
     .then((response) => response.json())
 
@@ -1507,7 +1538,7 @@ function loadMonthlyReport() {
   const role = localStorage.getItem("userRole") || "admin";
 
   fetch(
-    `https://script.google.com/macros/s/AKfycbxo_XzunHS3-7f959z3zlpCXtyAt-koWb2KSm8OiMGtVIc9Nv08t_0xUOhSGAVs9eMF/exec?action=read&role=${role}`
+    `https://script.google.com/macros/s/AKfycbwIVSGk_UTCda3kZbwTlGpAITka0rxTZeGu_W0kh0kA9AV7Oup32sYmqau52_7njRJ4/exec?action=read&role=${role}`
   )
     .then((response) => response.json())
 
@@ -1799,15 +1830,15 @@ function generateDriverMatrix() {
 
   Promise.all([
     fetch(
-      `https://script.google.com/macros/s/AKfycbxo_XzunHS3-7f959z3zlpCXtyAt-koWb2KSm8OiMGtVIc9Nv08t_0xUOhSGAVs9eMF/exec?action=read&role=${role}`
+      `https://script.google.com/macros/s/AKfycbwIVSGk_UTCda3kZbwTlGpAITka0rxTZeGu_W0kh0kA9AV7Oup32sYmqau52_7njRJ4/exec?action=read&role=${role}`
     ).then((r) => r.json()),
 
     fetch(
-      `https://script.google.com/macros/s/AKfycbxo_XzunHS3-7f959z3zlpCXtyAt-koWb2KSm8OiMGtVIc9Nv08t_0xUOhSGAVs9eMF/exec?action=readDinasLuar&role=${role}`
+      `https://script.google.com/macros/s/AKfycbwIVSGk_UTCda3kZbwTlGpAITka0rxTZeGu_W0kh0kA9AV7Oup32sYmqau52_7njRJ4/exec?action=readDinasLuar&role=${role}`
     ).then((r) => r.json()),
 
     fetch(
-      `https://script.google.com/macros/s/AKfycbxo_XzunHS3-7f959z3zlpCXtyAt-koWb2KSm8OiMGtVIc9Nv08t_0xUOhSGAVs9eMF/exec?action=readBiodata`
+      `https://script.google.com/macros/s/AKfycbwIVSGk_UTCda3kZbwTlGpAITka0rxTZeGu_W0kh0kA9AV7Oup32sYmqau52_7njRJ4/exec?action=readBiodata`
     ).then((r) => r.json())
   ])
 
@@ -2534,7 +2565,7 @@ function generateOvertimeChart(startDate = null, endDate = null) {
   const role = localStorage.getItem("userRole") || "admin";
 
   fetch(
-    `https://script.google.com/macros/s/AKfycbxo_XzunHS3-7f959z3zlpCXtyAt-koWb2KSm8OiMGtVIc9Nv08t_0xUOhSGAVs9eMF/exec?action=read&role=${role}`,
+    `https://script.google.com/macros/s/AKfycbwIVSGk_UTCda3kZbwTlGpAITka0rxTZeGu_W0kh0kA9AV7Oup32sYmqau52_7njRJ4/exec?action=read&role=${role}`,
     {
       method: "GET",
       mode: "cors"
@@ -2930,7 +2961,7 @@ window.addEventListener("load", loadDriverBiodata);
 
 function loadDriverBiodata() {
   fetch(
-    "https://script.google.com/macros/s/AKfycbxo_XzunHS3-7f959z3zlpCXtyAt-koWb2KSm8OiMGtVIc9Nv08t_0xUOhSGAVs9eMF/exec?action=readBiodata"
+    "https://script.google.com/macros/s/AKfycbwIVSGk_UTCda3kZbwTlGpAITka0rxTZeGu_W0kh0kA9AV7Oup32sYmqau52_7njRJ4/exec?action=readBiodata"
   )
     .then((res) => res.json())
     .then((data) => {
@@ -3039,7 +3070,7 @@ function generateDriverChart(useDateFilter = false) {
   const ctx = canvas.getContext("2d");
 
   fetch(
-    `https://script.google.com/macros/s/AKfycbxo_XzunHS3-7f959z3zlpCXtyAt-koWb2KSm8OiMGtVIc9Nv08t_0xUOhSGAVs9eMF/exec?action=read&role=${role}`
+    `https://script.google.com/macros/s/AKfycbwIVSGk_UTCda3kZbwTlGpAITka0rxTZeGu_W0kh0kA9AV7Oup32sYmqau52_7njRJ4/exec?action=read&role=${role}`
   )
     .then((response) => response.json())
     .then((data) => {
@@ -3299,7 +3330,7 @@ function submitDinasLuar() {
   };
 
   fetch(
-    "https://script.google.com/macros/s/AKfycbxo_XzunHS3-7f959z3zlpCXtyAt-koWb2KSm8OiMGtVIc9Nv08t_0xUOhSGAVs9eMF/exec",
+    "https://script.google.com/macros/s/AKfycbwIVSGk_UTCda3kZbwTlGpAITka0rxTZeGu_W0kh0kA9AV7Oup32sYmqau52_7njRJ4/exec",
     {
       method: "POST",
       body: JSON.stringify(data)
