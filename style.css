@@ -1407,6 +1407,46 @@ body {
   overflow-y:hidden;
   position:relative;
 }
+
+/* ================= FILTER ================= */
+
+.chart-filter{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-bottom:15px;
+}
+
+.chart-filter label{
+  font-weight:600;
+  color:#fff;
+}
+
+.chart-filter input,
+.chart-filter button,
+.chart-filter select{
+  padding:8px 12px;
+  border-radius:8px;
+  border:none;
+  outline:none;
+}
+
+.chart-filter button{
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.chart-filter button:hover{
+  transform:translateY(-2px);
+}
+
+.chart-filter select{
+  min-width:180px;
+  background:#fff;
+  cursor:pointer;
+}
+
 /* ================= CANVAS ================= */
 
 #overtimeLineChart{
