@@ -44,7 +44,7 @@ const users = {
 
 // foto user per email
 const userPhotos = {
-  "generalservice@pertamina.com": "https://i.postimg.cc/qR1C6dWC/silvia.png",
+  "derihanggara86@gmail.com": "https://i.postimg.cc/qR1C6dWC/silvia.png",
   "caesar@devimandiri.com": "https://i.postimg.cc/wBg2ZtdS/admint.jpg",
   "ojie@devimandiri.com": "https://i.postimg.cc/wBg2ZtdS/admint.jpg",
   "suharso@pertamina.com": "https://i.postimg.cc/wBg2ZtdS/admint.jpg",
@@ -2584,10 +2584,45 @@ function generateOvertimeChart(startDate = null, endDate = null) {
       }
     })
 
-    .then((data) => {
+    .then(async (data) => {
       if (!Array.isArray(data)) {
         throw new Error("Data bukan array!");
       }
+
+      /* ================= LOAD BIODATA ================= */
+
+      const biodataResponse = await fetch(
+        "https://script.google.com/macros/s/AKfycbwIVSGk_UTCda3kZbwTlGpAITka0rxTZeGu_W0kh0kA9AV7Oup32sYmqau52_7njRJ4/exec?action=readBiodata"
+      );
+
+      const biodataDriver = await biodataResponse.json();
+      console.log("BIODATA DRIVER");
+      console.table(biodataDriver);
+
+      console.log("BIODATA PERTAMA");
+      console.log(biodataDriver[0]);
+
+      /* ================= FILTER DEPARTEMENT ================= */
+
+      const selectedDept =
+        document.getElementById("departmentFilter")?.value || "all";
+
+      const departmentMap = {};
+
+      biodataDriver.forEach((item) => {
+        const nama = String(item.nama || "")
+          .trim()
+          .toLowerCase();
+
+        const dept = String(item.departement || item.department || "").trim();
+
+        departmentMap[nama] = dept;
+      });
+      console.log("=== BIODATA DRIVER ===");
+      console.table(biodataDriver);
+
+      console.log("=== DEPARTMENT MAP ===");
+      console.log(departmentMap);
 
       /* ================= FILTER DATA ================= */
 
@@ -2595,23 +2630,52 @@ function generateOvertimeChart(startDate = null, endDate = null) {
 
       if (startDate && endDate) {
         const start = new Date(startDate);
-
         start.setHours(0, 0, 0, 0);
 
         const end = new Date(endDate);
-
         end.setHours(23, 59, 59, 999);
 
-        filteredData = data.filter((row) => {
+        filteredData = filteredData.filter((row) => {
           if (!row[1]) return false;
 
           const rowDate = new Date(row[1]);
-
           rowDate.setHours(0, 0, 0, 0);
 
           return rowDate >= start && rowDate <= end;
         });
       }
+
+      /* ================= FILTER DEPARTEMENT ================= */
+
+      if (selectedDept !== "all") {
+        filteredData = filteredData.filter((row) => {
+          const namaDriver = String(row[0] || "")
+            .trim()
+            .toLowerCase();
+
+          const deptDriver = String(departmentMap[namaDriver] || "")
+            .trim()
+            .toLowerCase();
+
+          const deptDipilih = String(selectedDept || "")
+            .trim()
+            .toLowerCase();
+
+          console.log(
+            namaDriver,
+            "| Driver:",
+            deptDriver,
+            "| Dipilih:",
+            deptDipilih,
+            "| Cocok:",
+            deptDriver === deptDipilih
+          );
+
+          return deptDriver === deptDipilih;
+        });
+      }
+
+      console.log("Data setelah filter:", filteredData.length);
 
       /* ================= SUMMARY ================= */
 
@@ -2952,6 +3016,15 @@ function generateOvertimeChart(startDate = null, endDate = null) {
     .catch((err) => {
       console.error("❌ Gagal load chart:", err);
     });
+}
+/* ================= FILTER DEPARTEMENT ================= */
+
+function filterDepartmentChart() {
+  const startDate = document.getElementById("chartStartDate").value;
+
+  const endDate = document.getElementById("chartEndDate").value;
+
+  generateOvertimeChart(startDate, endDate);
 }
 /* ================= BIODATA DRIVER ================= */
 let biodataReady = false;
