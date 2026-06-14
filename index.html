@@ -850,7 +850,7 @@
       <script src="https://cdn.jsdelivr.net/npm/exceljs/dist/exceljs.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
 
-      <!-- ================= CHART SECTION ================= -->
+       <!-- ================= CHART SECTION ================= -->
 
       <div id="chartSection" style="display:none; margin-top:30px;">
 
@@ -878,6 +878,15 @@
                 Bulan Berjalan
               </button>
 
+              <select id="departmentFilter" onchange="filterDepartmentChart()">
+                <option value="all">Semua Departement</option>
+                <option value="Produksi">Produksi</option>
+                <option value="RAM">RAM</option>
+                <option value="WOWS">WOWS</option>
+                <option value="Pool / GS">Pool / GS</option>
+                <option value="HSE">HSE</option>
+                <option value="Field Manager">Field Manager</option>
+              </select>
             </div>
 
             <canvas id="overtimeLineChart"></canvas>
