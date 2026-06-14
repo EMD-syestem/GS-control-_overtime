@@ -1415,6 +1415,7 @@ body {
   height:100% !important;
   display:block;
 }
+
 /* ================= RESPONSIVE ================= */
 
 @media(max-width:768px){
@@ -1425,7 +1426,8 @@ body {
   }
 
   .chart-filter input,
-  .chart-filter button{
+  .chart-filter button,
+  .chart-filter select{
     width:100%;
   }
 
@@ -1434,7 +1436,6 @@ body {
     height:400px !important;
   }
 }
-
 #driverMatrixTable {
   width: 100%;
   border-collapse: collapse;
