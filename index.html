@@ -478,7 +478,7 @@
                 <option class="krp-field" value="Muhammad Rivaldi">Muhammad Rivaldi</option>
                 <option class="krp-field" value="Niko Nirwana">Niko Nirwana</option>
                 <option class="krp-field" value="Nur Fatonah">Nur Fatonah</option>
-                <option class="krp-field" value="NURHIDAYATTULLAH">NURHIDAYATTULLAH</option>
+                <option class="krp-field" value="Nurhidayattullah">Nurhidayattullah</option>
                 <option class="krp-field" value="Oki">Oki</option>
                 <option class="krp-field" value="Primulyadi">Primulyadi</option>
                 <option class="krp-field" value="Rahmat Syukur Pratama">Rahmat Syukur Pratama</option>
@@ -1026,15 +1026,48 @@
 
       </div>
 
+       <!-- ================= REPORT DINAS LUAR ================= -->
+
       <div id="reportDinasLuarSection" style="display:none; margin-top:30px;">
 
         <div class="report-container">
 
           <h3 class="report-title">
-            Report Dinas luar
+            Report Dinas Luar
           </h3>
 
-          <div id="reportDinasLuarSection" class="section">
+          <!-- FILTER REPORT DINAS LUAR -->
+
+          <div class="report-filter">
+
+            <div class="filter-group">
+              <label>Nama Driver</label>
+              <select id="filterDinasDriver">
+                <option value="">Semua Driver</option>
+              </select>
+            </div>
+
+            <div class="filter-group">
+              <label>Tanggal Awal</label>
+              <input type="date" id="filterDinasStart">
+            </div>
+
+            <div class="filter-group">
+              <label>Tanggal Akhir</label>
+              <input type="date" id="filterDinasEnd">
+            </div>
+
+            <button class="btn-dinas" onclick="filterReportDinasLuar()">
+              Filter
+            </button>
+
+            <button class="btn-reset-dinas" onclick="resetFilterDinasLuar()">
+              Reset
+            </button>
+
+          </div>
+
+          <div class="section">
 
             <div class="table-wrapper">
 
@@ -1057,6 +1090,10 @@
             </div>
 
           </div>
+
+        </div>
+
+      </div>
 </body>
 
 </html>
