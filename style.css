@@ -1560,37 +1560,76 @@ body {
   font-weight:bold;
 }
 
-/* ================= DINAS LUAR BUTTON ================= */
+/* ================= REPORT FILTER ================= */
 
-.btn-dinas {
-
-  background: #28a745;
-
-  color: white;
-
-  border: none;
-
-  padding: 12px 25px;
-
-  border-radius: 10px;
-
-  cursor: pointer;
-
-  font-size: 15px;
-
-  font-weight: bold;
-
-  margin-right: 10px;
-
-  transition: 0.3s;
+.report-filter{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  align-items:flex-end;
+  margin-bottom:20px;
 }
 
-.btn-dinas:hover {
-
-  background: #218838;
-
-  transform: translateY(-2px);
+.filter-group{
+  display:flex;
+  flex-direction:column;
 }
+
+.filter-group label{
+  font-size:13px;
+  font-weight:600;
+  margin-bottom:5px;
+  color:#333;
+}
+
+.filter-group select,
+.filter-group input{
+  min-width:180px;
+  padding:10px 12px;
+  border:1px solid #ccc;
+  border-radius:8px;
+  font-size:14px;
+  outline:none;
+}
+
+.filter-group select:focus,
+.filter-group input:focus{
+  border-color:#2b6db4;
+  box-shadow:0 0 0 2px rgba(43,109,180,.15);
+}
+
+/* ================= FILTER BUTTON ================= */
+
+.btn-dinas{
+
+  background:#28a745;
+
+  color:white;
+
+  border:none;
+
+  padding:12px 25px;
+
+  border-radius:10px;
+
+  cursor:pointer;
+
+  font-size:15px;
+
+  font-weight:bold;
+
+  margin-right:10px;
+
+  transition:.3s;
+}
+
+.btn-dinas:hover{
+
+  background:#218838;
+
+  transform:translateY(-2px);
+}
+
 
 /* ================= RESET BUTTON ================= */
 
