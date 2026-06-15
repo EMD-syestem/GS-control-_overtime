@@ -866,6 +866,7 @@ function formatTanggal(dateValue) {
 
 }
 
+let allDinasLuarData = [];
 function loadReportDinasLuar() {
 
   const role =
@@ -879,25 +880,11 @@ function loadReportDinasLuar() {
 
   .then(data => {
 
-    const tbody =
-      document.getElementById(
-        "reportDinasLuarBody"
-      );
+    allDinasLuarData = data;
 
-    tbody.innerHTML = "";
+    renderReportDinasLuar(data);
 
-    data.forEach(row => {
-
-      tbody.innerHTML += `
-        <tr>
-          <td>${row[0] || ""}</td>
-          <td>${formatTanggal(row[1])}</td>
-          <td>${row[2] || ""}</td>
-          <td>${row[3] || ""}</td>
-        </tr>
-      `;
-
-    });
+    loadDriverFilter(data);
 
   })
 
@@ -909,6 +896,124 @@ function loadReportDinasLuar() {
     );
 
   });
+
+}
+function renderReportDinasLuar(data){
+
+  const tbody =
+    document.getElementById(
+      "reportDinasLuarBody"
+    );
+
+  tbody.innerHTML = "";
+
+  data.forEach(row => {
+
+    tbody.innerHTML += `
+      <tr>
+        <td>${row[0] || ""}</td>
+        <td>${formatTanggal(row[1])}</td>
+        <td>${row[2] || ""}</td>
+        <td>${row[3] || ""}</td>
+      </tr>
+    `;
+
+  });
+
+}
+function loadDriverFilter(data){
+
+  const select =
+    document.getElementById(
+      "filterDinasDriver"
+    );
+
+  select.innerHTML =
+    '<option value="">Semua Driver</option>';
+
+  const drivers =
+    [...new Set(
+      data.map(row => row[0])
+    )]
+    .filter(Boolean)
+    .sort();
+
+  drivers.forEach(driver => {
+
+    select.innerHTML += `
+      <option value="${driver}">
+        ${driver}
+      </option>
+    `;
+
+  });
+
+}
+function filterReportDinasLuar(){
+
+  const selectedDriver =
+    document.getElementById(
+      "filterDinasDriver"
+    ).value;
+
+  const startDate =
+    document.getElementById(
+      "filterDinasStart"
+    ).value;
+
+  const endDate =
+    document.getElementById(
+      "filterDinasEnd"
+    ).value;
+
+  const filtered =
+    allDinasLuarData.filter(row => {
+
+      const driver =
+        row[0] || "";
+
+      const tanggal =
+        row[1]
+          ? new Date(row[1])
+              .toISOString()
+              .split("T")[0]
+          : "";
+
+      const cocokDriver =
+        !selectedDriver ||
+        driver === selectedDriver;
+
+      const cocokTanggal =
+        (!startDate || tanggal >= startDate) &&
+        (!endDate || tanggal <= endDate);
+
+      return (
+        cocokDriver &&
+        cocokTanggal
+      );
+
+    });
+
+  renderReportDinasLuar(filtered);
+
+}
+function resetFilterDinasLuar(){
+
+  document.getElementById(
+    "filterDinasDriver"
+  ).value = "";
+
+  document.getElementById(
+    "filterDinasStart"
+  ).value = "";
+
+  document.getElementById(
+    "filterDinasEnd"
+  ).value = "";
+
+  renderReportDinasLuar(
+    allDinasLuarData
+  );
 
 }
 
