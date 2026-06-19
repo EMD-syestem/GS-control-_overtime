@@ -6,6 +6,11 @@ const users = {
     role: "admin" // bisa buka semua
   },
 
+  "dian@devimandiri.com": {
+    password: "Dian2025",
+    role: "admin" // bisa buka semua
+  },
+
   "suharso@pertamina.com": {
     password: "acok2026",
     role: "admin" // bisa buka semua
@@ -21,18 +26,18 @@ const users = {
     role: "field" // hanya KRP FIELD
   },
 
-  "syahrul@devimandiri.com": {
+  "syahrul@pertamina.com": {
     password: "syahrul2026",
     role: "field" // hanya KRP FIELD
   },
 
-  "revino@devimandiri.com": {
-    password: "vino2026",
+  "vino@dispatcher1.com": {
+    password: "vino123",
     role: "field" // hanya KRP FIELD
   },
 
-  "rahmat@devimandiri.com": {
-    password: "rahmat2026",
+  "rahmat@dispatcher.com": {
+    password: "rahmat123",
     role: "field" // hanya KRP FIELD
   },
 
@@ -49,9 +54,10 @@ const userPhotos = {
   "ojie@devimandiri.com": "https://i.postimg.cc/wBg2ZtdS/admint.jpg",
   "suharso@pertamina.com": "https://i.postimg.cc/wBg2ZtdS/admint.jpg",
   "anggito@pertamina.com": "https://i.postimg.cc/wBg2ZtdS/admint.jpg",
-  "syahrul@devimandiri.com": "https://i.postimg.cc/wBg2ZtdS/admint.jpg",
-  "revino@devimandiri.com": "https://i.postimg.cc/wBg2ZtdS/admint.jpg",
-  "rahmat@devimandiri.com": "https://i.postimg.cc/wBg2ZtdS/admint.jpg"
+  "syahrul@pertamina.com": "https://i.postimg.cc/wBg2ZtdS/admint.jpg",
+  "vino@dispatcher1.com": "https://i.postimg.cc/wBg2ZtdS/admint.jpg",
+  "rahmat@dispatcher.com": "https://i.postimg.cc/wBg2ZtdS/admint.jpg",
+  "dian@devimandiri.com": "https://i.postimg.cc/wBg2ZtdS/admint.jpg"
 };
 
 function applyRole(role) {
