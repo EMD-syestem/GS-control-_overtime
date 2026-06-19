@@ -3869,18 +3869,18 @@ async function detailSTJ(index) {
 </tr>
 
 <tr>
-  <td><b>Kontak Driver</b></td>
-  <td>: ${item.driverContact || ""}</td>
-</tr>
-
-<tr>
-  <td><b>Tanggal Permintaan</b></td>
-  <td>: ${item.tanggalPermintaan || ""}</td>
-</tr>
-
-<tr>
   <td><b>Department</b></td>
   <td>: ${item.department || ""}</td>
+</tr>
+
+<tr>
+  <td><b>Status Jabatan</b></td>
+  <td>: ${item.statusJabatan || ""}</td>
+</tr>
+
+<tr>
+  <td><b>Kontak Driver</b></td>
+  <td>: ${item.driverContact || ""}</td>
 </tr>
 
 </table>
@@ -3896,8 +3896,8 @@ async function detailSTJ(index) {
 <table style="width:100%;">
 
 <tr>
-  <td><b>Status Jabatan</b></td>
-  <td>: ${item.statusJabatan || ""}</td>
+  <td><b>Tanggal Permintaan user</b></td>
+  <td>: ${item.tanggalPermintaan || ""}</td>
 </tr>
 
 <tr>
@@ -3931,6 +3931,7 @@ async function detailSTJ(index) {
 </tr>
 
 </table>
+
 
 </td>
 
