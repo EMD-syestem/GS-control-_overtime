@@ -3896,38 +3896,38 @@ async function detailSTJ(index) {
 <table style="width:100%;">
 
 <tr>
-  <td><b>Tanggal Permintaan user</b></td>
-  <td>: ${item.tanggalPermintaan || ""}</td>
-</tr>
-
-<tr>
-  <td><b>Tanggal Awal Pekerjaan</b></td>
-  <td>: ${item.tanggalAwalPekerjaan || ""}</td>
-</tr>
-
-<tr>
-  <td><b>Jam Awal Pekerjaan</b></td>
-  <td>: ${item.jamAwalPekerjaan || ""}</td>
-</tr>
-
-<tr>
-  <td><b>Jam Akhir Pekerjaan</b></td>
-  <td>: ${item.jamAkhirPekerjaan || ""}</td>
-</tr>
-
-<tr>
-  <td><b>Pemberi Pekerjaan</b></td>
-  <td>: ${item.pemberiPekerjaan || ""}</td>
-</tr>
-
-<tr>
-  <td><b>Peminta Pekerjaan</b></td>
+  <td><b>Pemohon Kendaraan</b></td>
   <td>: ${item.pemintaPekerjaan || ""}</td>
 </tr>
 
 <tr>
-  <td><b>Tanggal Akhir Pekerjaan</b></td>
+  <td><b>Tanggal Permohonan</b></td>
+  <td>: ${item.tanggalPermintaan || ""}</td>
+</tr>
+
+<tr>
+  <td><b>Tanggal Mulai Tugas</b></td>
+  <td>: ${item.tanggalAwalPekerjaan || ""}</td>
+</tr>
+
+<tr>
+  <td><b>Tanggal Selesai Tugas</b></td>
   <td>: ${item.tanggalAkhirPekerjaan || ""}</td>
+</tr>
+
+<tr>
+  <td><b>Jam Mulai Tugas</b></td>
+  <td>: ${item.jamAwalPekerjaan || ""}</td>
+</tr>
+
+<tr>
+  <td><b>Jam Selesai Tugas</b></td>
+  <td>: ${item.jamAkhirPekerjaan || ""}</td>
+</tr>
+
+<tr>
+  <td><b>Dispatcher</b></td>
+  <td>: ${item.pemberiPekerjaan || ""}</td>
 </tr>
 
 </table>
