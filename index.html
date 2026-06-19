@@ -1,20 +1,25 @@
-<html lang="id">
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>GS control overtime</title>
+    <link rel="stylesheet" href="./style.css">
+
+  </head>
+    
+  <body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Control Vehicle Timesheet Form</title>
+  <meta charset="UTF-8">
 
-<link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-
-   <!--  Favicon untuk Browser, Mobile, dan Desktop -->
-  <link rel="icon" type="image/png" sizes="16x16" href="https://i.postimg.cc/NMRDPgT5/GS-dispacer.jpg">
-  <link rel="icon" type="image/png" sizes="32x32" href="https://i.postimg.cc/NMRDPgT5/GS-dispacer.jpg">
-  <link rel="icon" type="image/png" sizes="48x48" href="https://i.postimg.cc/NMRDPgT5/GS-dispacer.jpg">
-  <link rel="icon" type="image/png" sizes="64x64" href="https://i.postimg.cc/NMRDPgT5/GS-dispacer.jpg">
-  <link rel="icon" type="image/png" sizes="180x180" https://i.postimg.cc/NMRDPgT5/GS-dispacer.jpg">
-  <link rel="shortcut icon" href="https://i.postimg.cc/NMRDPgT5/GS-dispacer.jpg" type="image/png">
+  <title>Control Vehicle Timesheet Form</title>
 
 </head>
 
@@ -55,71 +60,120 @@
     <div class="sidebar">
 
       <div class="sidebar-logo">
-
         <img src="https://i.postimg.cc/NMRDPgT5/GS-dispacer.jpg" alt="Logo">
-
       </div>
 
       <div class="logo">
         MENU PANEL
       </div>
 
-      <ul class="menu">
+      <!-- ================= TIMESHEET ================= -->
 
-        <li id="adminDashboardMenu" style="display:none;">
-          <a href="https://emd-syestem.github.io/Dasboard_Overtime/" target="_blank">
-            Dashboard Driver
-          </a>
-        </li>
-        <li>
-          <a href="#" onclick="showSection('formSection')">
-            Input Timesheet
-          </a>
-        </li>
+      <div class="menu-box">
 
-        <li>
-          <a href="#" onclick="showSection('dinasLuarSection')">
-            Input Dinas luar
-          </a>
-        </li>
+        <div class="menu-box-title">
+          TIMESHEET & REPORT
+        </div>
 
-        <li>
-          <a href="#" onclick="showSection('reportSection')">
-            Daily Overtime Report
-          </a>
-        </li>
+        <ul class="menu">
 
-        <li>
-          <a href="#" onclick="showSection('reportDinasLuarSection')">
-            Report Dinas Luar
-          </a>
-        </li>
+          <li id="adminDashboardMenu" style="display:none;">
+            <a href="https://emd-syestem.github.io/Dasboard_Overtime/" target="_blank">
+              Dashboard Driver
+            </a>
+          </li>
 
-        <li>
-          <a href="#" onclick="showSection('monthlyReportSection')">
-            Monthly Report
-          </a>
-        </li>
+          <li>
+            <a href="#" onclick="showSection('formSection')">
+              ⏺️ Input Timesheet
+            </a>
+          </li>
 
-        <li>
-          <a href="#" onclick="showSection('driverMatrixSection')">
-            Driver Attendance Sheet
-          </a>
-        </li>
+          <li>
+            <a href="#" onclick="showSection('reportSection')">
+              Daily Overtime Report
+            </a>
+          </li>
 
-        <li>
-          <a href="#" onclick="showSection('chartSection')">
-            Overtime Chart
-          </a>
-        </li>
+          <li>
+            <a href="#" onclick="showSection('monthlyReportSection')">
+              Monthly Report
+            </a>
+          </li>
 
-        <li>
-          <a href="#" onclick="showSection('driverChartSection')">
-            Driver Chart
-          </a>
-        </li>
+          <li>
+            <a href="#" onclick="showSection('driverMatrixSection')">
+              Driver Attendance Sheet
+            </a>
+          </li>
 
-      </ul>
+          <li>
+            <a href="#" onclick="showSection('chartSection')">
+              Overtime Chart
+            </a>
+          </li>
+
+          <li>
+            <a href="#" onclick="showSection('driverChartSection')">
+              Driver Chart
+            </a>
+          </li>
+
+        </ul>
+
+      </div>
+
+      <!-- ================= DINAS LUAR ================= -->
+
+      <div class="menu-box">
+
+        <div class="menu-box-title">
+          DINAS LUAR
+        </div>
+
+        <ul class="menu">
+
+          <li>
+            <a href="#" onclick="showSection('dinasLuarSection')">
+              ⏺️ Input Dinas Luar
+            </a>
+          </li>
+
+          <li>
+            <a href="#" onclick="showSection('reportDinasLuarSection')">
+              Report Dinas Luar
+            </a>
+          </li>
+
+        </ul>
+
+      </div>
+
+      <!-- ================= STJ ================= -->
+
+      <div class="menu-box">
+
+        <div class="menu-box-title">
+          SURAT TUGAS JALAN (STJ)
+        </div>
+
+        <ul class="menu">
+
+          <li>
+            <a href="#" onclick="showSection('pekerjaanDriverSection')">
+              ⏺️ Input STJ
+            </a>
+          </li>
+
+          <li>
+            <a href="#" onclick="showSection('reportSTJSection')">
+              Report Surat Tugas Jalan
+            </a>
+          </li>
+
+        </ul>
+
+      </div>
 
     </div>
     <!-- ================= MAIN CONTENT ================= -->
@@ -224,7 +278,7 @@
                 <option class="krp-field" value="Muhammad Rivaldi">Muhammad Rivaldi</option>
                 <option class="krp-field" value="Niko Nirwana">Niko Nirwana</option>
                 <option class="krp-field" value="Nur Fatonah">Nur Fatonah</option>
-                <option class="krp-field" value="NURHIDAYATTULLAH">NURHIDAYATTULLAH</option>
+                <option class="krp-field" value="Nurhidayattullah">Nurhidayattullah</option>
                 <option class="krp-field" value="Oki">Oki</option>
                 <option class="krp-field" value="Primulyadi">Primulyadi</option>
                 <option class="krp-field" value="Rahmat Syukur Pratama">Rahmat Syukur Pratama</option>
@@ -850,7 +904,7 @@
       <script src="https://cdn.jsdelivr.net/npm/exceljs/dist/exceljs.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
 
-       <!-- ================= CHART SECTION ================= -->
+      <!-- ================= CHART SECTION ================= -->
 
       <div id="chartSection" style="display:none; margin-top:30px;">
 
@@ -1026,7 +1080,7 @@
 
       </div>
 
-       <!-- ================= REPORT DINAS LUAR ================= -->
+      <!-- ================= REPORT DINAS LUAR ================= -->
 
       <div id="reportDinasLuarSection" style="display:none; margin-top:30px;">
 
@@ -1094,6 +1148,206 @@
         </div>
 
       </div>
+
+      <!-- ================= PEKERJAAN DRIVER ================= -->
+
+      <div id="pekerjaanDriverSection" style="display:none;">
+
+        <div class="form-container">
+
+          <h3 style="color:white;">
+            Form Surat Tugas Jalan
+          </h3>
+
+          <!-- ================= IDENTITAS DRIVER ================= -->
+
+          <div class="driver-form-grid">
+
+            <!-- 1. FOTO DRIVER -->
+            <div class="driver-photo-section">
+
+              <label>Foto Driver</label>
+
+              <div class="driver-photo-box">
+                <img id="jobDriverPhoto" src="https://i.postimg.cc/NMRDPgT5/GS-dispacer.jpg" alt="Foto Driver">
+              </div>
+
+            </div>
+
+            <!-- 2. NAMA DRIVER -->
+            <div class="form-group">
+              <label for="jobNamaDriver">Nama Driver</label>
+              <select id="jobNamaDriver">
+                <option value="" disabled selected>Pilih Driver</option>
+              </select>
+            </div>
+
+            <!-- 3. NO BADGE -->
+            <div class="form-group">
+              <label for="jobBadge">No Badge</label>
+              <input type="text" id="jobBadge" readonly placeholder="No Badge Otomatis">
+            </div>
+
+            <!-- 4. FLEET CODE -->
+            <div class="form-group">
+              <label for="jobFleetCode">Fleet Code</label>
+              <input type="text" id="jobFleetCode" readonly placeholder="Fleet Code Otomatis">
+            </div>
+
+            <!-- 4A. JENIS KENDARAAN -->
+            <div class="form-group">
+              <label for="jobVehicleType">Jenis Kendaraan</label>
+              <input type="text" id="jobVehicleType" readonly placeholder="Jenis Kendaraan Otomatis">
+
+            </div>
+
+            <div class="form-group driver-contact-group">
+              <label>Driver contact</label>
+              <input id="drivercontact">
+            </div>
+
+            <!-- 5. DEPARTMENT -->
+            <div class="form-group">
+              <label for="jobDepartment">Department</label>
+              <input type="text" id="jobDepartment" readonly placeholder="Department Otomatis">
+            </div>
+
+            <!-- 6. STATUS JABATAN -->
+            <div class="form-group">
+              <label>Status Jabatan</label>
+              <input type="text" id="jobStatusJabatan" readonly placeholder="Status Jabatan Otomatis">
+            </div>
+
+            <!-- 7. TANGGAL PERMINTAAN -->
+            <div class="form-group">
+              <label>Tanggal Permintaan User</label>
+              <input type="date" id="jobTanggal">
+            </div>
+
+            <!-- 8. TANGGAL PEKERJAAN -->
+            <div class="form-group">
+              <label>Tanggal Pekerjaan</label>
+              <input type="date" id="jobTanggalPekerjaan">
+            </div>
+
+            <!-- 9. JAM MULAI -->
+            <div class="form-group">
+              <label>Jam Mulai</label>
+              <input type="time" id="jobJamMulai">
+            </div>
+
+            <!-- 10. JAM SELESAI -->
+            <div class="form-group jam-selesai-group">
+              <label>Jam Selesai</label>
+              <input type="time" id="jobJamSelesai">
+            </div>
+
+            <div class="form-group pemberi-job-group">
+              <label>Pemberi Job</label>
+              <input id="jobInputBy">
+            </div>
+
+            <div class="form-group peminta-job-group">
+              <label>Peminta Pekerjaan</label>
+              <input id="jobPeminta">
+            </div>
+
+            <div class="form-group tanggal-akhir-group">
+              <label>Tanggal Akhir Pekerjaan</label>
+              <input id="jobTanggalAkhir" type="date">
+            </div>
+
+            <!-- SUMMARY (SPAN 3 KOLOM) -->
+            <div class="form-group summary-group">
+              <label>Summary Pekerjaan</label>
+              <textarea id="jobSummary" placeholder="Masukkan ringkasan pekerjaan driver..."></textarea>
+            </div>
+
+            <!-- BUTTON (SPAN 3 KOLOM) -->
+            <div class="button-group">
+              <button class="btn-dinas" onclick="submitPekerjaanDriver()">Submit</button>
+              <button class="btn-reset-dinas" onclick="resetPekerjaanDriver()">Reset</button>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ================= REPORT STJ ================= -->
+
+      <div id="reportSTJSection" style="display:none;">
+
+        <div class="report-container">
+
+          <h3>Report Surat Tugas Jalan (STJ)</h3>
+
+          <div class="report-toolbar">
+            <button class="btn-export-stj" onclick="downloadSTJExcel()">
+              Export Excel
+            </button>
+
+            <button class="btn-refresh-stj" onclick="refreshSTJData()">
+              Refresh Data
+            </button>
+
+            <input type="text" id="searchSTJ" placeholder="Cari Driver / Badge / Fleet..." onkeyup="filterSTJ()">
+          </div>
+
+          <div class="table-wrapper">
+
+            <table id="stjTable">
+
+              <thead>
+                <tr>
+                  <th>Nama</th>
+                  <th>No Badge</th>
+                  <th>Fleet Code</th>
+                  <th>Jenis Kendaraan</th>
+                  <th>Driver contact</th>
+                  <th>Tanggal Permintaan</th>
+                  <th>Department</th>
+                  <th>Status Jabatan</th>
+                  <th>Tanggal Awal Pekerjaan</th>
+                  <th>Jam Awal Pekerjaan</th>
+                  <th>Jam Akhir Pekerjaan</th>
+                  <th>Pemberi Pekerjaan</th>
+                  <th>Peminta Pekerjaan</th>
+                  <th>Tanggal Akhir Pekerjaan</th>
+                  <th>Summary Pekerjaan</th>
+                  <th>Status</th>
+                  <th>Aksi</th>
+                </tr>
+              </thead>
+
+              <tbody id="stjTableBody">
+              </tbody>
+              <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+            </table>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div id="stjModal" class="stj-modal">
+
+        <div class="stj-modal-content">
+
+          <span class="close-modal" onclick="closeSTJModal()">
+            &times;
+          </span>
+
+          <div id="stjPreview"></div>
+
+        </div>
+
+      </div>
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
 </body>
 
 </html>

@@ -275,13 +275,53 @@ body {
   font-weight: bold;
 
   margin-top: 10px;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
 
   text-align: center;
 
   color: white;
 
   letter-spacing: 1px;
+}
+
+/* ================= MENU GROUP BOX ================= */
+
+.menu-box {
+
+  margin-bottom: 20px;
+
+  padding: 12px;
+
+  border: 2px solid rgba(255,255,255,0.25);
+
+  border-radius: 18px;
+
+  background: rgba(255,255,255,0.08);
+
+  box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+}
+
+/* ================= MENU GROUP TITLE ================= */
+
+.menu-box-title {
+
+  text-align: center;
+
+  color: white;
+
+  font-size: 13px;
+
+  font-weight: bold;
+
+  letter-spacing: 1px;
+
+  text-transform: uppercase;
+
+  margin-bottom: 12px;
+
+  padding-bottom: 10px;
+
+  border-bottom: 1px solid rgba(255,255,255,0.25);
 }
 
 /* ================= MENU ================= */
@@ -293,10 +333,15 @@ body {
 }
 
 .menu li {
-  margin-bottom: 15px;
+  margin-bottom: 12px;
+}
+
+.menu li:last-child {
+  margin-bottom: 0;
 }
 
 .menu a {
+
   display: block;
 
   padding: 15px;
@@ -305,7 +350,7 @@ body {
 
   text-decoration: none;
 
-  background: rgba(255, 255, 255, 0.18);
+  background: rgba(255,255,255,0.18);
 
   color: white;
 
@@ -319,11 +364,31 @@ body {
 /* ================= MENU HOVER ================= */
 
 .menu a:hover {
+
   background: white;
 
   color: #5c8d59;
 
   transform: translateX(5px);
+}
+
+/* ================= SIDEBAR SCROLL ================= */
+
+.sidebar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+  background: rgba(255,255,255,0.1);
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.3);
+  border-radius: 10px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255,255,255,0.5);
 }
 
 /* ================= MAIN ================= */
@@ -1022,12 +1087,7 @@ body {
 
   z-index: 10;
 
-  background:linear-gradient(
-    135deg,
-    #5c8d59,
-    #4a7c59
-  );
-  
+  background: linear-gradient(135deg, #5c8d59, #4a7c59);
 
   color: white;
 
@@ -1323,157 +1383,156 @@ body {
 
 /* ================= CHART FILTER ================= */
 
-.chart-filter{
-  display:flex;
-  flex-wrap:wrap;
-  align-items:center;
-  gap:10px;
-  margin-bottom:20px;
-  padding:15px;
-  background:#f8fafc;
-  border:1px solid #dbe4ee;
-  border-radius:12px;
+.chart-filter {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  padding: 15px;
+  background: #f8fafc;
+  border: 1px solid #dbe4ee;
+  border-radius: 12px;
 }
 
-.chart-filter label{
-  font-size:14px;
-  font-weight:600;
-  color:#374151;
+.chart-filter label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
 }
 
-.chart-filter input[type="date"]{
-  padding:8px 12px;
-  border:1px solid #cbd5e1;
-  border-radius:8px;
-  font-size:14px;
-  background:#fff;
-  color:#333;
-  outline:none;
-  transition:all .3s ease;
+.chart-filter input[type="date"] {
+  padding: 8px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 14px;
+  background: #fff;
+  color: #333;
+  outline: none;
+  transition: all 0.3s ease;
 }
 
-.chart-filter input[type="date"]:focus{
-  border-color:#3b82f6;
-  box-shadow:0 0 0 3px rgba(59,130,246,.15);
+.chart-filter input[type="date"]:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
 }
 
 /* ================= BUTTON ================= */
 
-.chart-filter button{
-  padding:10px 18px;
-  border:none;
-  border-radius:10px;
-  cursor:pointer;
-  font-size:14px;
-  font-weight:600;
-  color:#fff;
-  transition:all .3s ease;
+.chart-filter button {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  transition: all 0.3s ease;
 }
 
 /* Tombol Filter */
 
-.chart-filter button:first-of-type{
-  background:#2563eb;
+.chart-filter button:first-of-type {
+  background: #2563eb;
 }
 
-.chart-filter button:first-of-type:hover{
-  background:#1d4ed8;
-  transform:translateY(-2px);
-  box-shadow:0 6px 12px rgba(37,99,235,.25);
+.chart-filter button:first-of-type:hover {
+  background: #1d4ed8;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(37, 99, 235, 0.25);
 }
 
 /* Tombol Bulan Berjalan */
 
-.chart-filter button:last-of-type{
-  background:#10b981;
+.chart-filter button:last-of-type {
+  background: #10b981;
 }
 
-.chart-filter button:last-of-type:hover{
-  background:#059669;
-  transform:translateY(-2px);
-  box-shadow:0 6px 12px rgba(16,185,129,.25);
+.chart-filter button:last-of-type:hover {
+  background: #059669;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(16, 185, 129, 0.25);
 }
 
-.chart-filter button:active{
-  transform:scale(.96);
+.chart-filter button:active {
+  transform: scale(0.96);
 }
 
 /* ================= CHART WRAPPER ================= */
 
-.chart-wrapper{
-  width:100%;
-  height:600px;
-  overflow-x:auto;
-  overflow-y:hidden;
-  position:relative;
+.chart-wrapper {
+  width: 100%;
+  height: 600px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  position: relative;
 }
 
 /* ================= FILTER ================= */
 
-.chart-filter{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  flex-wrap:wrap;
-  margin-bottom:15px;
+.chart-filter {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
 }
 
-.chart-filter label{
-  font-weight:600;
-  color:#fff;
+.chart-filter label {
+  font-weight: 600;
+  color: #fff;
 }
 
 .chart-filter input,
 .chart-filter button,
-.chart-filter select{
-  padding:8px 12px;
-  border-radius:8px;
-  border:none;
-  outline:none;
+.chart-filter select {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
 }
 
-.chart-filter button{
-  cursor:pointer;
-  transition:0.3s;
+.chart-filter button {
+  cursor: pointer;
+  transition: 0.3s;
 }
 
-.chart-filter button:hover{
-  transform:translateY(-2px);
+.chart-filter button:hover {
+  transform: translateY(-2px);
 }
 
-.chart-filter select{
-  min-width:180px;
-  background:#fff;
-  cursor:pointer;
+.chart-filter select {
+  min-width: 180px;
+  background: #fff;
+  cursor: pointer;
 }
 
 /* ================= CANVAS ================= */
 
-#overtimeLineChart{
-  min-width:1200px;
-  width:100% !important;
-  height:100% !important;
-  display:block;
+#overtimeLineChart {
+  min-width: 1200px;
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
 }
 
 /* ================= RESPONSIVE ================= */
 
-@media(max-width:768px){
-
-  .chart-filter{
-    flex-direction:column;
-    align-items:stretch;
+@media (max-width: 768px) {
+  .chart-filter {
+    flex-direction: column;
+    align-items: stretch;
   }
 
   .chart-filter input,
   .chart-filter button,
-  .chart-filter select{
-    width:100%;
+  .chart-filter select {
+    width: 100%;
   }
 
-  #overtimeLineChart{
-    min-width:900px;
-    height:400px !important;
+  #overtimeLineChart {
+    min-width: 900px;
+    height: 400px !important;
   }
 }
 #driverMatrixTable {
@@ -1548,122 +1607,117 @@ body {
   background: #fff3f3;
 }
 
-.holiday{
-  background:#ff0000 !important;
-  color:#fff !important;
-  font-weight:bold;
+.holiday {
+  background: #ff0000 !important;
+  color: #fff !important;
+  font-weight: bold;
 }
 
-.holiday-data{
-  background:#ffd6d6 !important;
-  color:#c00000 !important;
-  font-weight:bold;
+.holiday-data {
+  background: #ffd6d6 !important;
+  color: #c00000 !important;
+  font-weight: bold;
 }
 
 /* ================= REPORT FILTER ================= */
 
-.report-filter{
-  display:flex;
-  flex-wrap:wrap;
-  gap:12px;
-  align-items:flex-end;
-  margin-bottom:20px;
+.report-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: flex-end;
+  margin-bottom: 20px;
 }
 
-.filter-group{
-  display:flex;
-  flex-direction:column;
+.filter-group {
+  display: flex;
+  flex-direction: column;
 }
 
-.filter-group label{
-  font-size:13px;
-  font-weight:600;
-  margin-bottom:5px;
-  color:#333;
+.filter-group label {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #333;
 }
 
 .filter-group select,
-.filter-group input{
-  min-width:180px;
-  padding:10px 12px;
-  border:1px solid #ccc;
-  border-radius:8px;
-  font-size:14px;
-  outline:none;
+.filter-group input {
+  min-width: 180px;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
 }
 
 .filter-group select:focus,
-.filter-group input:focus{
-  border-color:#2b6db4;
-  box-shadow:0 0 0 2px rgba(43,109,180,.15);
+.filter-group input:focus {
+  border-color: #2b6db4;
+  box-shadow: 0 0 0 2px rgba(43, 109, 180, 0.15);
 }
 
 /* ================= FILTER BUTTON ================= */
 
-.btn-dinas{
+.btn-dinas {
+  background: #28a745;
 
-  background:#28a745;
+  color: white;
 
-  color:white;
+  border: none;
 
-  border:none;
+  padding: 12px 25px;
 
-  padding:12px 25px;
+  border-radius: 10px;
 
-  border-radius:10px;
+  cursor: pointer;
 
-  cursor:pointer;
+  font-size: 15px;
 
-  font-size:15px;
+  font-weight: bold;
 
-  font-weight:bold;
+  margin-right: 10px;
 
-  margin-right:10px;
-
-  transition:.3s;
+  transition: 0.3s;
 }
 
-.btn-dinas:hover{
+.btn-dinas:hover {
+  background: #218838;
 
-  background:#218838;
-
-  transform:translateY(-2px);
+  transform: translateY(-2px);
 }
 
 /* ================= RESET BUTTON ================= */
 
-.btn-reset-dinas{
+.btn-reset-dinas {
+  background: #dc3545;
 
-  background:#dc3545;
+  color: white;
 
-  color:white;
+  border: none;
 
-  border:none;
+  padding: 12px 25px;
 
-  padding:12px 25px;
+  border-radius: 10px;
 
-  border-radius:10px;
+  cursor: pointer;
 
-  cursor:pointer;
+  font-size: 15px;
 
-  font-size:15px;
+  font-weight: bold;
 
-  font-weight:bold;
-
-  transition:.3s;
+  transition: 0.3s;
 }
 
-.btn-reset-dinas:hover{
+.btn-reset-dinas:hover {
+  background: #c82333;
 
-  background:#c82333;
-
-  transform:translateY(-2px);
+  transform: translateY(-2px);
 }
 
 /* ================= BUTTON WRAPPER ================= */
 
 .button-group {
-
   display: flex;
 
   gap: 10px;
@@ -1671,11 +1725,10 @@ body {
   margin-top: 20px;
 }
 .btn-action {
-      background-color: rgba(76, 175, 80, 0.7);
-    }
+  background-color: rgba(76, 175, 80, 0.7);
+}
 
 .delete-btn {
-
   background: #dc3545;
 
   color: white;
@@ -1694,210 +1747,802 @@ body {
 }
 
 .delete-btn:hover {
-
   background: #bb2d3b;
 }
 
 /* ================= HEADER DRIVER ================= */
 
-.driver-header{
-  display:flex;
-  align-items:flex-start;
-  justify-content:flex-start;
-  gap:20px;
-  margin-bottom:15px;
+.driver-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 20px;
+  margin-bottom: 15px;
 }
 
-.driver-select-box{
-  width:300px;
-  flex:none;
+.driver-select-box {
+  width: 300px;
+  flex: none;
 }
 
-.driver-select-box select{
-  width:100%;
-  padding:10px;
-  border:1px solid #cfd8dc;
-  border-radius:8px;
-  font-size:14px;
-  background:#fff;
+.driver-select-box select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #cfd8dc;
+  border-radius: 8px;
+  font-size: 14px;
+  background: #fff;
 }
 
 /* ================= FOTO DRIVER ================= */
 
-.driver-profile-card{
-  width:120px;
-  margin:0;
-  background:#fff;
-  border-radius:10px;
-  overflow:hidden;
-  box-shadow:0 2px 8px rgba(0,0,0,.08);
-  text-align:center;
-  flex:none;
+.driver-profile-card {
+  width: 120px;
+  margin: 0;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  flex: none;
 }
 
-.driver-profile-card img{
-  width:120px;
-  height:140px;
-  object-fit:cover;
-  display:block;
+.driver-profile-card img {
+  width: 120px;
+  height: 140px;
+  object-fit: cover;
+  display: block;
 }
 
-#driverPhotoName{
-  padding:6px;
-  font-size:12px;
-  font-weight:600;
-  line-height:1.3;
-  color:#374151;
+#driverPhotoName {
+  padding: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: #374151;
 }
 /* ================= FILTER DRIVER CHART ================= */
 
-.driver-chart-filter{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  flex-wrap:wrap;
-  padding:12px 16px;
-  margin:8px 0 12px;
-  background:#f8fafc;
-  border:1px solid #dbe2e8;
-  border-radius:12px;
+.driver-chart-filter {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 12px 16px;
+  margin: 8px 0 12px;
+  background: #f8fafc;
+  border: 1px solid #dbe2e8;
+  border-radius: 12px;
 }
 
-.driver-chart-filter label{
-  font-weight:600;
-  color:#374151;
+.driver-chart-filter label {
+  font-weight: 600;
+  color: #374151;
 }
 
-.driver-chart-filter input[type="date"]{
-  padding:8px 12px;
-  border:1px solid #cfd8dc;
-  border-radius:8px;
-  font-size:13px;
+.driver-chart-filter input[type="date"] {
+  padding: 8px 12px;
+  border: 1px solid #cfd8dc;
+  border-radius: 8px;
+  font-size: 13px;
 }
 
-.driver-chart-filter button{
-  padding:10px 18px;
-  border:none;
-  border-radius:8px;
-  background:#10b981;
-  color:#fff;
-  font-weight:600;
-  cursor:pointer;
-  transition:.3s;
+.driver-chart-filter button {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+  background: #10b981;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
-.driver-chart-filter button:hover{
-  transform:translateY(-2px);
-  box-shadow:0 4px 10px rgba(0,0,0,.15);
+.driver-chart-filter button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
 /* ================= CHART ================= */
 
-#driverChartSection{
-  margin-top:30px !important;
+#driverChartSection {
+  margin-top: 30px !important;
 }
 
-.chart-wrapper{
-  margin-top:0;
-  padding-top:0;
+.chart-wrapper {
+  margin-top: 0;
+  padding-top: 0;
 }
 
-#driverChart{
-  margin-top:-5px;
+#driverChart {
+  margin-top: -5px;
 }
 
 /* ================= MOBILE ================= */
 
-@media(max-width:768px){
-
-  .driver-header{
-    flex-direction:column;
-    align-items:center;
+@media (max-width: 768px) {
+  .driver-header {
+    flex-direction: column;
+    align-items: center;
   }
 
-  .driver-select-box{
-    width:100%;
+  .driver-select-box {
+    width: 100%;
   }
 
-  .driver-select-box select{
-    width:100%;
+  .driver-select-box select {
+    width: 100%;
   }
 
-  .driver-profile-card{
-    margin-top:10px;
+  .driver-profile-card {
+    margin-top: 10px;
   }
-
 }
 
-#reportDinasLuarSection{
+#reportDinasLuarSection {
+  padding: 20px;
+}
+
+#reportDinasLuarSection .table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+#reportDinasLuarSection table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 700px;
+}
+
+#reportDinasLuarSection th {
+  background: linear-gradient(135deg, #5c8d59, #4a7c59);
+  color: #fff;
+  padding: 12px;
+  text-align: center;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+#reportDinasLuarSection td {
+  padding: 10px;
+  border-bottom: 1px solid #e5e7eb;
+  text-align: center;
+}
+
+#reportDinasLuarSection tbody tr:nth-child(even) {
+  background: #f8fbf8;
+}
+
+#reportDinasLuarSection tbody tr:hover {
+  background: #e8f5e9;
+  transition: 0.2s;
+}
+
+#reportDinasLuarSection table {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+#reportDinasLuarSection::-webkit-scrollbar {
+  height: 8px;
+}
+
+#reportDinasLuarSection::-webkit-scrollbar-thumb {
+  background: #5c8d59;
+  border-radius: 10px;
+}
+
+#jobSummary {
+  width: 100%;
+  min-height: 140px;
+  padding: 12px;
+  border: 1px solid #b7d8b7;
+  border-radius: 12px;
+  background: #eef5ee;
+  box-sizing: border-box;
+  resize: vertical;
+  font-family: inherit;
+  font-size: 14px;
+}
+/* ==========================
+   GRID UTAMA FORM DRIVER
+========================== */
+
+.driver-form-grid {
+  display: grid;
+  grid-template-columns: 110px repeat(3, 1fr);
+  gap: 15px;
+  align-items: start;
+}
+
+/* ==========================
+   FOTO DRIVER (KIRI, NGEHOLD 3 BARIS)
+========================== */
+
+.driver-photo-section {
+  grid-row: 1 / span 3;
+}
+
+/* ==========================
+   LABEL
+========================== */
+
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #2f4f4f;
+}
+
+/* ==========================
+   INPUT & SELECT
+========================== */
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  height: 48px;
+  padding: 0 14px;
+
+  border: 1px solid #b9d8bc;
+  border-radius: 14px;
+
+  background: #eef5ee;
+
+  font-size: 14px;
+  box-sizing: border-box;
+
+  outline: none;
+  transition: 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #4caf50;
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.15);
+}
+
+/* ==========================
+   FOTO DRIVER BOX
+========================== */
+
+.driver-photo-section label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #2f4f4f;
+}
+
+.driver-photo-box {
+  width: 110px;
+  height: 140px;
+
+  border-radius: 12px;
+  overflow: hidden;
+
+  border: 2px solid #dfe6df;
+  background: #fff;
+}
+
+.driver-photo-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ==========================
+   SUMMARY (FULL WIDTH)
+========================== */
+
+.summary-group {
+  grid-column: 1 / 5 !important; /* 110px + 3 kolom = 4 kolom total */
+  width: 100%;
+}
+
+.summary-group textarea {
+  width: 100%;
+  min-height: 180px;
+
+  padding: 12px;
+  border-radius: 14px;
+
+  border: 1px solid #b9d8bc;
+  background: #eef5ee;
+
+  font-size: 14px;
+  resize: vertical;
+  outline: none;
+}
+
+.summary-group textarea:focus {
+  border-color: #4caf50;
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.15);
+}
+
+/* ==========================
+   BUTTON (FULL WIDTH)
+========================== */
+
+.button-group {
+  grid-column: 1 / 5 !important; /* FIX UTAMA */
+  width: 100%;
+
+  display: flex;
+  gap: 12px;
+
+  justify-content: flex-start;
+  margin-top: 10px;
+}
+/* ==========================
+   RESPONSIVE
+========================== */
+
+@media (max-width: 992px) {
+  .driver-form-grid {
+    grid-template-columns: 110px repeat(2, 1fr);
+  }
+
+  .summary-group,
+  .button-group {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 600px) {
+  .driver-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .driver-photo-section {
+    grid-row: auto;
+  }
+
+  .summary-group,
+  .button-group {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ==========================
+   POSISI KHUSUS TANGGAL AKHIR
+========================== */
+
+.tanggal-akhir-group{
+  grid-column: 4;
+  grid-row: 5;
+}
+
+/* ==========================
+   SUSUNAN BARIS BAWAH FORM
+========================== */
+
+.driver-form-grid{
+  grid-auto-flow: row;
+}
+
+/* Jam Selesai */
+.jam-selesai-group{
+  grid-column: 2;
+}
+
+/* Pemberi Job */
+.pemberi-job-group{
+  grid-column: 3;
+}
+
+/* Peminta Pekerjaan */
+.peminta-job-group{
+  grid-column: 4;
+}
+
+/* Tanggal Akhir di bawah Peminta */
+.tanggal-akhir-group{
+  grid-column: 2;
+}
+
+/* Summary tetap full */
+.summary-group {
+  grid-column: 2 / 5 !important;
+  width: 100%;
+}
+
+.button-group {
+  grid-column: 2 / 5 !important;
+  width: 100%;
+}
+/* ==========================
+   LAYOUT KHUSUS FORM STJ
+========================== */
+
+/* Baris 4 */
+#jobJamMulai{
+  width:100%;
+}
+
+.form-group:has(#jobJamMulai){
+  grid-column:2;
+  grid-row:4;
+}
+
+.jam-selesai-group{
+  grid-column:3;
+  grid-row:4;
+}
+
+.pemberi-job-group{
+  grid-column:4;
+  grid-row:4;
+}
+
+/* Baris 5 */
+
+.peminta-job-group{
+  grid-column:2;
+  grid-row:5;
+}
+
+.tanggal-akhir-group{
+  grid-column:3;
+  grid-row:5;
+}
+
+/* Summary */
+
+.summary-group{
+  grid-column:2 / 5 !important;
+  grid-row:6;
+}
+
+/* Tombol */
+
+.button-group{
+  grid-column:2 / 5 !important;
+  grid-row:7;
+}
+
+.report-container{
+  background:#fff;
+  padding:20px;
+  border-radius:15px;
+  margin-top:30px; /*  tambah jarak dari header */
+}
+.report-container h3{
+  margin-bottom:15px;
+}
+
+.report-toolbar{
+  display:flex;
+  gap:10px;
+  margin-bottom:15px;
+}
+
+.report-toolbar input{
+  flex:1;
+  padding:10px;
+  border-radius:10px;
+  border:1px solid #ccc;
+}
+
+.btn-export-stj{
+  background:#28a745;
+  color:#fff;
+  border:none;
+  padding:10px 15px;
+  border-radius:10px;
+  cursor:pointer;
+}
+
+.table-wrapper{
+  overflow:auto;
+}
+
+#stjTable{
+  width:100%;
+  border-collapse:collapse;
+  min-width:1800px;
+}
+
+#stjTable th{
+  background:linear-gradient(135deg, #5c8d59, #4a7c59);
+  color:white;
+  padding:10px;
+  text-align:center;
+}
+
+#stjTable td{
+  border:1px solid #ddd;
+  padding:8px;
+}
+
+#stjTable tr:nth-child(even){
+  background:#f8f8f8;
+}
+
+.table-wrapper{
+  max-height:600px; /* sesuaikan kebutuhan */
+  overflow-y:auto;
+  overflow-x:auto;
+}
+
+#stjTable th{
+  position:sticky;
+  top:0;
+  z-index:100;
+
+  background:linear-gradient(135deg, #5c8d59, #4a7c59);
+  color:white;
+}
+
+.status-select{
+  width:170px;
+  padding:6px;
+  border-radius:6px;
+  border:1px solid #ccc;
+  font-size:13px;
+}
+
+.stj-modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.6);
+  z-index:99999;
+
+  justify-content:center;
+  align-items:center;
+}
+
+.stj-modal-content{
+  position:relative;
+
+  background:#fff;
+  width:95%;
+  max-width:1200px;
+  max-height:95vh;
+
+  overflow:auto;
+  border-radius:10px;
   padding:20px;
 }
 
-#reportDinasLuarSection .table-wrapper{
-  width:100%;
-  overflow-x:auto;
-  background:#fff;
-  border-radius:12px;
-  box-shadow:0 4px 12px rgba(0,0,0,.08);
+.close-modal{
+  position:absolute;
+
+  top:5px;
+  right:10px;
+
+  background:none;
+  border:none;
+
+  color:red;
+
+  font-size:22px;
+  font-weight:bold;
+  line-height:1;
+
+  cursor:pointer;
+
+  box-shadow:none;
+  width:auto;
+  height:auto;
+}
+/* ================= TOMBOL DETAIL ================= */
+
+.btn-detail{
+  background:#003366;
+  color:#fff;
+
+  border:none;
+  border-radius:6px;
+
+  padding:8px 16px;
+
+  font-size:13px;
+  font-weight:600;
+
+  cursor:pointer;
+
+  transition:all .25s ease;
+
+  min-width:80px;
 }
 
-#reportDinasLuarSection table{
+.btn-detail:hover{
+  background:#0055a5;
+  transform:translateY(-2px);
+
+  box-shadow:
+    0 4px 10px rgba(0,0,0,.2);
+}
+
+.btn-detail:active{
+  transform:translateY(0);
+}
+
+.btn-detail:focus{
+  outline:none;
+}
+
+.btn-refresh-stj{
+  background:#007bff;
+  color:#fff;
+  border:none;
+  padding:10px 15px;
+  border-radius:6px;
+  cursor:pointer;
+  margin-left:8px;
+  font-weight:600;
+}
+
+.btn-refresh-stj:hover{
+  background:#0056b3;
+}
+
+/* ================= HEADER STJ ================= */
+
+.stj-header{
+  position:relative;
+
+  display:grid;
+  grid-template-columns:120px 1fr 90px;
+
+  align-items:center;
+
+  background:linear-gradient(
+    to bottom,
+    #8eb1e8,
+    #4f84cf
+  );
+
+  border:1px solid #2f5f9d;
+
+  margin:-20px -20px 20px -20px;
+
+  min-height:120px;
+}
+.stj-logo-left{
+  background:#fff;
+  height:100%;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  border-right:1px solid #2f5f9d;
+}
+
+.stj-logo-left img{
+  width:100px;
+}
+
+.stj-header-title{
+  text-align:center;
+  color:#fff;
+}
+
+.stj-title{
+  font-size:20px;
+  font-weight:700;
+  letter-spacing:.5px;
+}
+
+.stj-subtitle{
+  font-size:16px;
+  font-weight:600;
+  margin-top:8px;
+}
+
+.stj-logo-right{
+  position:absolute;
+
+  top:0;
+  right:0;
+}
+.stj-logo-right img{
+  width:50px;
+}
+
+/* ================= BODY STJ ================= */
+
+.stj-body{
+  display:flex;
+  align-items:flex-start;
+  gap:25px;
+  margin-top:20px;
+}
+
+/* FOTO DRIVER */
+
+.stj-photo{
+  width:120px;
+  flex-shrink:0;
+}
+
+.stj-photo img{
+  width:100%;
+  height:160px;
+  object-fit:cover;
+  border:1px solid #000;
+}
+
+/* ================= KOTAK DATA ================= */
+
+.stj-info{
+  flex:1;
+  width:calc(100% + 50px);
+}
+
+.stj-info table{
   width:100%;
   border-collapse:collapse;
-  min-width:700px;
+  border:1px solid #000;
+  box-sizing:border-box;
 }
 
-#reportDinasLuarSection th{
-  background:linear-gradient(
-    135deg,
-    #5c8d59,
-    #4a7c59
-  );
-  color:#fff;
-  padding:12px;
-  text-align:center;
-  font-weight:600;
+.stj-info td{
+  padding:5px 8px;
+  font-size:14px;
+  vertical-align:top;
+}
+
+.stj-info td:nth-child(1),
+.stj-info td:nth-child(3){
+  font-weight:bold;
+  width:180px;
   white-space:nowrap;
 }
 
-#reportDinasLuarSection td{
-  padding:10px;
-  border-bottom:1px solid #e5e7eb;
+/* ================= SUMMARY ================= */
+
+.stj-summary{
+  margin-top:25px;
+  margin-left:145px;
+}
+
+.stj-summary-title{
+  font-weight:bold;
+  margin-bottom:10px;
+}
+
+.stj-summary-box{
+  border:1px solid #000;
+  min-height:120px;
+  padding:15px;
+
+  width:calc(100% + 50px);
+  box-sizing:border-box;
+}
+/* ================= TANDA TANGAN ================= */
+
+.stj-sign{
+  width:calc(100% - 95px);
+  margin-left:145px;
+  margin-top:25px;
+  border-collapse:collapse;
+}
+
+.stj-sign th,
+.stj-sign td{
+  border:1px solid #000;
   text-align:center;
 }
 
-#reportDinasLuarSection tbody tr:nth-child(even){
-  background:#f8fbf8;
+.stj-sign td{
+  height:100px;
 }
 
-#reportDinasLuarSection tbody tr:hover{
-  background:#e8f5e9;
-  transition:.2s;
-}
+.stj-nomor-surat{
+  position:relative;
+  left:140px;
 
-#reportDinasLuarSection table{
-  border-radius:12px;
-  overflow:hidden;
-}
+  margin:12px 0 20px 0;
+  text-align:left;
 
-#reportDinasLuarSection::-webkit-scrollbar{
-  height:8px;
-}
-
-#reportDinasLuarSection::-webkit-scrollbar-thumb{
-  background:#5c8d59;
-  border-radius:10px;
-}
-
-#jobSummary{
-  width:100%;
-  min-height:140px;
-  padding:12px;
-  border:1px solid #b7d8b7;
-  border-radius:12px;
-  background:#eef5ee;
-  box-sizing:border-box;
-  resize:vertical;
-  font-family:inherit;
   font-size:14px;
+  font-weight:600;
 }

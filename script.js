@@ -5,12 +5,12 @@ const users = {
     password: "embun2017",
     role: "admin" // bisa buka semua
   },
-  
+
   "suharso@pertamina.com": {
     password: "acok2026",
     role: "admin" // bisa buka semua
   },
-  
+
   "anggito@pertamina.com": {
     password: "gito2026",
     role: "admin" // bisa buka semua
@@ -20,18 +20,18 @@ const users = {
     password: "cs2026",
     role: "field" // hanya KRP FIELD
   },
-  
-   "syahrul@devimandiri.com": {
+
+  "syahrul@devimandiri.com": {
     password: "syahrul2026",
     role: "field" // hanya KRP FIELD
   },
-  
-   "revino@devimandiri.com": {
+
+  "revino@devimandiri.com": {
     password: "vino2026",
     role: "field" // hanya KRP FIELD
   },
-  
-   "rahmat@devimandiri.com": {
+
+  "rahmat@devimandiri.com": {
     password: "rahmat2026",
     role: "field" // hanya KRP FIELD
   },
@@ -52,7 +52,6 @@ const userPhotos = {
   "syahrul@devimandiri.com": "https://i.postimg.cc/wBg2ZtdS/admint.jpg",
   "revino@devimandiri.com": "https://i.postimg.cc/wBg2ZtdS/admint.jpg",
   "rahmat@devimandiri.com": "https://i.postimg.cc/wBg2ZtdS/admint.jpg"
- 
 };
 
 function applyRole(role) {
@@ -696,7 +695,7 @@ function hitungLembur() {
   };
 
   fetch(
-    "https://script.google.com/macros/s/AKfycbwIVSGk_UTCda3kZbwTlGpAITka0rxTZeGu_W0kh0kA9AV7Oup32sYmqau52_7njRJ4/exec",
+    "https://script.google.com/macros/s/AKfycbyxB_Bo2GNbb3EMc2JcPuUNmHHXMCSZndSjGDHiQFJ5R6GW49BxJsdjDCdcgtliZAE/exec",
     {
       method: "POST",
       body: JSON.stringify(data)
@@ -774,8 +773,12 @@ function showSection(sectionId) {
   document.getElementById("formSection").style.display = "none";
 
   document.getElementById("dinasLuarSection").style.display = "none";
-  
+
   document.getElementById("reportDinasLuarSection").style.display = "none";
+
+  document.getElementById("pekerjaanDriverSection").style.display = "none";
+
+  document.getElementById("reportSTJSection").style.display = "none";
 
   document.getElementById("reportSection").style.display = "none";
 
@@ -796,10 +799,10 @@ function showSection(sectionId) {
   if (sectionId === "reportSection") {
     loadReport();
   }
-  
+
   if (sectionId === "reportDinasLuarSection") {
-  loadReportDinasLuar();
-}
+    loadReportDinasLuar();
+  }
 
   /* ================= LOAD MONTHLY ================= */
 
@@ -811,6 +814,10 @@ function showSection(sectionId) {
 
   if (sectionId === "driverMatrixSection") {
     generateDriverMatrix();
+  }
+
+  if (sectionId === "reportSTJSection") {
+    loadReportSTJ();
   }
 
   /* ================= LOAD OVERTIME CHART ================= */
@@ -840,75 +847,59 @@ function showSection(sectionId) {
       select.value = firstOption.value;
     }
 
-    console.log("Role:", role);
-    console.log("Driver default:", select.value);
-
     loadDriverPhoto();
 
     generateDriverChart();
   }
+
+  /* ================= PEKERJAAN DRIVER ================= */
+
+  if (sectionId === "pekerjaanDriverSection") {
+    const today = new Date().toISOString().split("T")[0];
+
+    document.getElementById("jobTanggal").value = today;
+  }
 }
 
 function formatTanggal(dateValue) {
-
   if (!dateValue) return "";
 
   const date = new Date(dateValue);
 
-  return date.toLocaleDateString(
-    "id-ID",
-    {
-      day: "2-digit",
-      month: "2-digit",
-      year: "numeric"
-    }
-  );
-
+  return date.toLocaleDateString("id-ID", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric"
+  });
 }
 
 let allDinasLuarData = [];
 function loadReportDinasLuar() {
-
-  const role =
-    localStorage.getItem("userRole") || "admin";
+  const role = localStorage.getItem("userRole") || "admin";
 
   fetch(
-    `https://script.google.com/macros/s/AKfycbwIVSGk_UTCda3kZbwTlGpAITka0rxTZeGu_W0kh0kA9AV7Oup32sYmqau52_7njRJ4/exec?action=readDinasLuar&role=${role}`
+    `https://script.google.com/macros/s/AKfycbyxB_Bo2GNbb3EMc2JcPuUNmHHXMCSZndSjGDHiQFJ5R6GW49BxJsdjDCdcgtliZAE/exec?action=readDinasLuar&role=${role}`
   )
+    .then((res) => res.json())
 
-  .then(res => res.json())
+    .then((data) => {
+      allDinasLuarData = data;
 
-  .then(data => {
+      renderReportDinasLuar(data);
 
-    allDinasLuarData = data;
+      loadDriverFilter(data);
+    })
 
-    renderReportDinasLuar(data);
-
-    loadDriverFilter(data);
-
-  })
-
-  .catch(err => {
-
-    console.error(
-      "Gagal load dinas luar:",
-      err
-    );
-
-  });
-
+    .catch((err) => {
+      console.error("Gagal load dinas luar:", err);
+    });
 }
-function renderReportDinasLuar(data){
-
-  const tbody =
-    document.getElementById(
-      "reportDinasLuarBody"
-    );
+function renderReportDinasLuar(data) {
+  const tbody = document.getElementById("reportDinasLuarBody");
 
   tbody.innerHTML = "";
 
-  data.forEach(row => {
-
+  data.forEach((row) => {
     tbody.innerHTML += `
       <tr>
         <td>${row[0] || ""}</td>
@@ -917,104 +908,55 @@ function renderReportDinasLuar(data){
         <td>${row[3] || ""}</td>
       </tr>
     `;
-
   });
-
 }
-function loadDriverFilter(data){
+function loadDriverFilter(data) {
+  const select = document.getElementById("filterDinasDriver");
 
-  const select =
-    document.getElementById(
-      "filterDinasDriver"
-    );
+  select.innerHTML = '<option value="">Semua Driver</option>';
 
-  select.innerHTML =
-    '<option value="">Semua Driver</option>';
-
-  const drivers =
-    [...new Set(
-      data.map(row => row[0])
-    )]
+  const drivers = [...new Set(data.map((row) => row[0]))]
     .filter(Boolean)
     .sort();
 
-  drivers.forEach(driver => {
-
+  drivers.forEach((driver) => {
     select.innerHTML += `
       <option value="${driver}">
         ${driver}
       </option>
     `;
+  });
+}
+function filterReportDinasLuar() {
+  const selectedDriver = document.getElementById("filterDinasDriver").value;
 
+  const startDate = document.getElementById("filterDinasStart").value;
+
+  const endDate = document.getElementById("filterDinasEnd").value;
+
+  const filtered = allDinasLuarData.filter((row) => {
+    const driver = row[0] || "";
+
+    const tanggal = row[1] ? new Date(row[1]).toISOString().split("T")[0] : "";
+
+    const cocokDriver = !selectedDriver || driver === selectedDriver;
+
+    const cocokTanggal =
+      (!startDate || tanggal >= startDate) && (!endDate || tanggal <= endDate);
+
+    return cocokDriver && cocokTanggal;
   });
 
-}
-function filterReportDinasLuar(){
-
-  const selectedDriver =
-    document.getElementById(
-      "filterDinasDriver"
-    ).value;
-
-  const startDate =
-    document.getElementById(
-      "filterDinasStart"
-    ).value;
-
-  const endDate =
-    document.getElementById(
-      "filterDinasEnd"
-    ).value;
-
-  const filtered =
-    allDinasLuarData.filter(row => {
-
-      const driver =
-        row[0] || "";
-
-      const tanggal =
-        row[1]
-          ? new Date(row[1])
-              .toISOString()
-              .split("T")[0]
-          : "";
-
-      const cocokDriver =
-        !selectedDriver ||
-        driver === selectedDriver;
-
-      const cocokTanggal =
-        (!startDate || tanggal >= startDate) &&
-        (!endDate || tanggal <= endDate);
-
-      return (
-        cocokDriver &&
-        cocokTanggal
-      );
-
-    });
-
   renderReportDinasLuar(filtered);
-
 }
-function resetFilterDinasLuar(){
+function resetFilterDinasLuar() {
+  document.getElementById("filterDinasDriver").value = "";
 
-  document.getElementById(
-    "filterDinasDriver"
-  ).value = "";
+  document.getElementById("filterDinasStart").value = "";
 
-  document.getElementById(
-    "filterDinasStart"
-  ).value = "";
+  document.getElementById("filterDinasEnd").value = "";
 
-  document.getElementById(
-    "filterDinasEnd"
-  ).value = "";
-
-  renderReportDinasLuar(
-    allDinasLuarData
-  );
-
+  renderReportDinasLuar(allDinasLuarData);
 }
 
 /* ================= LOAD REPORT ================= */
@@ -1025,7 +967,7 @@ function loadReport() {
   console.log("ROLE:", role);
 
   fetch(
-    `https://script.google.com/macros/s/AKfycbwIVSGk_UTCda3kZbwTlGpAITka0rxTZeGu_W0kh0kA9AV7Oup32sYmqau52_7njRJ4/exec?action=readWithRow&role=${role}`
+    `https://script.google.com/macros/s/AKfycbyxB_Bo2GNbb3EMc2JcPuUNmHHXMCSZndSjGDHiQFJ5R6GW49BxJsdjDCdcgtliZAE/exec?action=readWithRow&role=${role}`
   )
     .then((response) => response.json())
 
@@ -1127,7 +1069,7 @@ function deleteReport(rowNumber) {
   if (!konfirmasi) return;
 
   fetch(
-    `https://script.google.com/macros/s/AKfycbwIVSGk_UTCda3kZbwTlGpAITka0rxTZeGu_W0kh0kA9AV7Oup32sYmqau52_7njRJ4/exec?action=delete&row=${rowNumber}`
+    `https://script.google.com/macros/s/AKfycbyxB_Bo2GNbb3EMc2JcPuUNmHHXMCSZndSjGDHiQFJ5R6GW49BxJsdjDCdcgtliZAE/exec?action=delete&row=${rowNumber}`
   )
     .then((response) => response.json())
     .then((result) => {
@@ -1157,7 +1099,7 @@ function filterTanggal() {
   const role = localStorage.getItem("userRole") || "admin";
 
   fetch(
-    `https://script.google.com/macros/s/AKfycbwIVSGk_UTCda3kZbwTlGpAITka0rxTZeGu_W0kh0kA9AV7Oup32sYmqau52_7njRJ4/exec?action=read&role=${role}`
+    `https://script.google.com/macros/s/AKfycbyxB_Bo2GNbb3EMc2JcPuUNmHHXMCSZndSjGDHiQFJ5R6GW49BxJsdjDCdcgtliZAE/exec?action=read&role=${role}`
   )
     .then((response) => response.json())
 
@@ -1504,7 +1446,7 @@ function filterMonthlyReport() {
   const role = localStorage.getItem("userRole") || "admin";
 
   fetch(
-    `https://script.google.com/macros/s/AKfycbwIVSGk_UTCda3kZbwTlGpAITka0rxTZeGu_W0kh0kA9AV7Oup32sYmqau52_7njRJ4/exec?action=read&role=${role}`
+    `https://script.google.com/macros/s/AKfycbyxB_Bo2GNbb3EMc2JcPuUNmHHXMCSZndSjGDHiQFJ5R6GW49BxJsdjDCdcgtliZAE/exec?action=read&role=${role}`
   )
     .then((response) => response.json())
 
@@ -1643,7 +1585,7 @@ function loadMonthlyReport() {
   const role = localStorage.getItem("userRole") || "admin";
 
   fetch(
-    `https://script.google.com/macros/s/AKfycbwIVSGk_UTCda3kZbwTlGpAITka0rxTZeGu_W0kh0kA9AV7Oup32sYmqau52_7njRJ4/exec?action=read&role=${role}`
+    `https://script.google.com/macros/s/AKfycbyxB_Bo2GNbb3EMc2JcPuUNmHHXMCSZndSjGDHiQFJ5R6GW49BxJsdjDCdcgtliZAE/exec?action=read&role=${role}`
   )
     .then((response) => response.json())
 
@@ -1935,15 +1877,15 @@ function generateDriverMatrix() {
 
   Promise.all([
     fetch(
-      `https://script.google.com/macros/s/AKfycbwIVSGk_UTCda3kZbwTlGpAITka0rxTZeGu_W0kh0kA9AV7Oup32sYmqau52_7njRJ4/exec?action=read&role=${role}`
+      `https://script.google.com/macros/s/AKfycbyxB_Bo2GNbb3EMc2JcPuUNmHHXMCSZndSjGDHiQFJ5R6GW49BxJsdjDCdcgtliZAE/exec?action=read&role=${role}`
     ).then((r) => r.json()),
 
     fetch(
-      `https://script.google.com/macros/s/AKfycbwIVSGk_UTCda3kZbwTlGpAITka0rxTZeGu_W0kh0kA9AV7Oup32sYmqau52_7njRJ4/exec?action=readDinasLuar&role=${role}`
+      `https://script.google.com/macros/s/AKfycbyxB_Bo2GNbb3EMc2JcPuUNmHHXMCSZndSjGDHiQFJ5R6GW49BxJsdjDCdcgtliZAE/exec?action=readDinasLuar&role=${role}`
     ).then((r) => r.json()),
 
     fetch(
-      `https://script.google.com/macros/s/AKfycbwIVSGk_UTCda3kZbwTlGpAITka0rxTZeGu_W0kh0kA9AV7Oup32sYmqau52_7njRJ4/exec?action=readBiodata`
+      `https://script.google.com/macros/s/AKfycbyxB_Bo2GNbb3EMc2JcPuUNmHHXMCSZndSjGDHiQFJ5R6GW49BxJsdjDCdcgtliZAE/exec?action=readBiodata`
     ).then((r) => r.json())
   ])
 
@@ -2670,7 +2612,7 @@ function generateOvertimeChart(startDate = null, endDate = null) {
   const role = localStorage.getItem("userRole") || "admin";
 
   fetch(
-    `https://script.google.com/macros/s/AKfycbwIVSGk_UTCda3kZbwTlGpAITka0rxTZeGu_W0kh0kA9AV7Oup32sYmqau52_7njRJ4/exec?action=read&role=${role}`,
+    `https://script.google.com/macros/s/AKfycbyxB_Bo2GNbb3EMc2JcPuUNmHHXMCSZndSjGDHiQFJ5R6GW49BxJsdjDCdcgtliZAE/exec?action=read&role=${role}`,
     {
       method: "GET",
       mode: "cors"
@@ -2697,7 +2639,7 @@ function generateOvertimeChart(startDate = null, endDate = null) {
       /* ================= LOAD BIODATA ================= */
 
       const biodataResponse = await fetch(
-        "https://script.google.com/macros/s/AKfycbwIVSGk_UTCda3kZbwTlGpAITka0rxTZeGu_W0kh0kA9AV7Oup32sYmqau52_7njRJ4/exec?action=readBiodata"
+        "https://script.google.com/macros/s/AKfycbyxB_Bo2GNbb3EMc2JcPuUNmHHXMCSZndSjGDHiQFJ5R6GW49BxJsdjDCdcgtliZAE/exec?action=readBiodata"
       );
 
       const biodataDriver = await biodataResponse.json();
@@ -3131,6 +3073,7 @@ function filterDepartmentChart() {
 
   generateOvertimeChart(startDate, endDate);
 }
+
 /* ================= BIODATA DRIVER ================= */
 let biodataReady = false;
 let biodataDriver = [];
@@ -3139,7 +3082,7 @@ window.addEventListener("load", loadDriverBiodata);
 
 function loadDriverBiodata() {
   fetch(
-    "https://script.google.com/macros/s/AKfycbwIVSGk_UTCda3kZbwTlGpAITka0rxTZeGu_W0kh0kA9AV7Oup32sYmqau52_7njRJ4/exec?action=readBiodata"
+    "https://script.google.com/macros/s/AKfycbyxB_Bo2GNbb3EMc2JcPuUNmHHXMCSZndSjGDHiQFJ5R6GW49BxJsdjDCdcgtliZAE/exec?action=readBiodata"
   )
     .then((res) => res.json())
     .then((data) => {
@@ -3248,7 +3191,7 @@ function generateDriverChart(useDateFilter = false) {
   const ctx = canvas.getContext("2d");
 
   fetch(
-    `https://script.google.com/macros/s/AKfycbwIVSGk_UTCda3kZbwTlGpAITka0rxTZeGu_W0kh0kA9AV7Oup32sYmqau52_7njRJ4/exec?action=read&role=${role}`
+    `https://script.google.com/macros/s/AKfycbyxB_Bo2GNbb3EMc2JcPuUNmHHXMCSZndSjGDHiQFJ5R6GW49BxJsdjDCdcgtliZAE/exec?action=read&role=${role}`
   )
     .then((response) => response.json())
     .then((data) => {
@@ -3508,7 +3451,7 @@ function submitDinasLuar() {
   };
 
   fetch(
-    "https://script.google.com/macros/s/AKfycbwIVSGk_UTCda3kZbwTlGpAITka0rxTZeGu_W0kh0kA9AV7Oup32sYmqau52_7njRJ4/exec",
+    "https://script.google.com/macros/s/AKfycbyxB_Bo2GNbb3EMc2JcPuUNmHHXMCSZndSjGDHiQFJ5R6GW49BxJsdjDCdcgtliZAE/exec",
     {
       method: "POST",
       body: JSON.stringify(data)
@@ -3518,4 +3461,856 @@ function submitDinasLuar() {
     .then(() => {
       alert("Data Dinas Luar berhasil disimpan");
     });
+}
+
+window.addEventListener("load", () => {
+  const source = document.getElementById("namaDriver");
+
+  const target = document.getElementById("jobNamaDriver");
+
+  target.innerHTML = source.innerHTML;
+});
+window.addEventListener("load", () => {
+  fetch(
+    "https://script.google.com/macros/s/AKfycbyxB_Bo2GNbb3EMc2JcPuUNmHHXMCSZndSjGDHiQFJ5R6GW49BxJsdjDCdcgtliZAE/exec?action=readBiodata"
+  )
+    .then((res) => res.json())
+    .then((data) => {
+      biodataDriver = data;
+
+      const selectDriver = document.getElementById("jobNamaDriver");
+
+      selectDriver.innerHTML =
+        '<option value="" disabled selected>Pilih Driver</option>';
+
+      data.forEach((driver) => {
+        const option = document.createElement("option");
+
+        option.value = driver.nama;
+        option.textContent = driver.nama;
+
+        selectDriver.appendChild(option);
+      });
+    })
+    .catch((err) => {
+      console.error("Gagal load biodata:", err);
+    });
+});
+
+let stjData = [];
+
+document
+  .getElementById("jobNamaDriver")
+  .addEventListener("change", function () {
+    const namaDriver = this.value;
+
+    const driver = biodataDriver.find((d) => d.nama === namaDriver);
+
+    if (!driver) return;
+
+    /* ================= FOTO ================= */
+
+    document.getElementById("jobDriverPhoto").src =
+      driver.photo || "https://i.postimg.cc/BbpbqCQy/egi.jpg";
+
+    /* ================= BADGE ================= */
+
+    const badgeField = document.getElementById("jobBadge");
+
+    badgeField.value = driver.badge || "";
+
+    /* ================= FLEET CODE ================= */
+
+    const fleetField = document.getElementById("jobFleetCode");
+
+    fleetField.value = driver.fleet || "";
+
+    /* ================= DEPARTMENT ================= */
+
+    const departmentField = document.getElementById("jobDepartment");
+    departmentField.value = driver.departement || "";
+
+    /* ================= JENIS KENDARAAN ================= */
+
+    const vehicleField = document.getElementById("jobVehicleType");
+    vehicleField.value = driver.jeniskendaraan || "";
+
+    /* ================= DRIVER CONTACT ================= */
+
+    const contactField = document.getElementById("drivercontact");
+    contactField.value = driver.drivercontact || "";
+
+    /* ================= JABATAN ================= */
+
+    const jabatanField = document.getElementById("jobStatusJabatan");
+    jabatanField.value = driver.jabatan || "";
+  });
+
+async function submitPekerjaanDriver() {
+  const data = {
+    namaDriver: document.getElementById("jobNamaDriver").value,
+
+    noBadge: document.getElementById("jobBadge").value,
+
+    fleetCode: document.getElementById("jobFleetCode").value,
+
+    jenisKendaraan: document.getElementById("jobVehicleType").value,
+
+    drivercontact: document.getElementById("drivercontact").value,
+
+    tanggalPermintaan: document.getElementById("jobTanggal").value,
+
+    department: document.getElementById("jobDepartment").value,
+
+    statusJabatan: document.getElementById("jobStatusJabatan").value,
+
+    tanggalAwalPekerjaan: document.getElementById("jobTanggalPekerjaan").value,
+
+    jamAwalPekerjaan: document.getElementById("jobJamMulai").value,
+
+    jamAkhirPekerjaan: document.getElementById("jobJamSelesai").value,
+
+    pemberiPekerjaan: document.getElementById("jobInputBy").value,
+
+    pemintaPekerjaan: document.getElementById("jobPeminta").value,
+
+    tanggalAkhirPekerjaan: document.getElementById("jobTanggalAkhir").value,
+
+    summaryPekerjaan: document.getElementById("jobSummary").value,
+
+    status: "Open"
+  };
+
+  try {
+    await fetch(
+      "https://script.google.com/macros/s/AKfycbxyTOkKDvhFmQnyFzB1BfK4ZVocf3X7wVQKwAtyvR2i-JrqGekMkgXqwTwQWMop_rOgsA/exec",
+      {
+        method: "POST",
+        mode: "no-cors",
+        body: JSON.stringify(data)
+      }
+    );
+
+    alert("Data STJ berhasil dikirim");
+
+    resetPekerjaanDriver();
+  } catch (error) {
+    console.error("ERROR:", error);
+    console.error("MESSAGE:", error.message);
+
+    alert("Terjadi kesalahan saat mengirim data\n" + error.message);
+  }
+}
+function resetPekerjaanDriver() {
+  document.getElementById("jobNamaDriver").selectedIndex = 0;
+
+  document.getElementById("jobBadge").value = "";
+  document.getElementById("jobFleetCode").value = "";
+  document.getElementById("jobDepartment").value = "";
+
+  document.getElementById("jobDriverPhoto").src =
+    "https://i.postimg.cc/NMRDPgT5/GS-dispacer.jpg";
+
+  document.getElementById("jobVehicleType").value = "";
+  document.getElementById("drivercontact").value = "";
+  document.getElementById("jobStatusJabatan").value = "";
+
+  document.getElementById("jobTanggal").value = "";
+  document.getElementById("jobTanggalPekerjaan").value = "";
+  document.getElementById("jobJamMulai").value = "";
+  document.getElementById("jobJamSelesai").value = "";
+  document.getElementById("jobTanggalAkhir").value = "";
+
+  document.getElementById("jobPeminta").value = "";
+  document.getElementById("jobSummary").value = "";
+}
+
+function loadInputByUser() {
+  const name = localStorage.getItem("reservationName") || "Unknown User";
+
+  const inputBy = document.getElementById("jobInputBy");
+
+  if (inputBy) {
+    inputBy.value = name;
+  }
+}
+
+document.addEventListener("DOMContentLoaded", loadInputByUser);
+
+function filterSTJ() {
+  const keyword = document.getElementById("searchSTJ").value.toLowerCase();
+
+  const rows = document.querySelectorAll("#stjTableBody tr");
+
+  rows.forEach((row) => {
+    const text = row.textContent.toLowerCase();
+
+    row.style.display = text.includes(keyword) ? "" : "none";
+  });
+}
+
+async function loadReportSTJ() {
+  const tbody = document.getElementById("stjTableBody");
+
+  tbody.innerHTML = "<tr><td colspan='17'>Loading...</td></tr>";
+
+  try {
+    const response = await fetch(
+      "https://script.google.com/macros/s/AKfycbxyTOkKDvhFmQnyFzB1BfK4ZVocf3X7wVQKwAtyvR2i-JrqGekMkgXqwTwQWMop_rOgsA/exec"
+    );
+
+    const data = await response.json();
+
+    stjData = data;
+
+    tbody.innerHTML = "";
+
+    data.forEach((item, index) => {
+      tbody.innerHTML += `
+
+        <tr>
+
+          <td>${item.nama || ""}</td>
+          <td>${item.noBadge || ""}</td>
+          <td>${item.fleetCode || ""}</td>
+          <td>${item.jenisKendaraan || ""}</td>
+          <td>${item.driverContact || ""}</td>
+          <td>${item.tanggalPermintaan || ""}</td>
+          <td>${item.department || ""}</td>
+          <td>${item.statusJabatan || ""}</td>
+          <td>${item.tanggalAwalPekerjaan || ""}</td>
+          <td>${item.jamAwalPekerjaan || ""}</td>
+          <td>${item.jamAkhirPekerjaan || ""}</td>
+          <td>${item.pemberiPekerjaan || ""}</td>
+          <td>${item.pemintaPekerjaan || ""}</td>
+          <td>${item.tanggalAkhirPekerjaan || ""}</td>
+          <td>${item.summaryPekerjaan || ""}</td>
+
+          <td>
+
+            <select
+              class="status-select"
+              onchange="updateStatusSTJ(${item.rowNumber}, this.value)">
+
+              <option value="Open"
+                ${item.status === "Open" ? "selected" : ""}>
+                Open
+              </option>
+
+              <option value="Close"
+                ${item.status === "Close" ? "selected" : ""}>
+                Close
+              </option>
+
+              <option value="Kendaraan Full Job"
+                ${item.status === "Kendaraan Full Job" ? "selected" : ""}>
+                Kendaraan Full Job
+              </option>
+
+              <option value="User Mengcancel"
+                ${item.status === "User Mengcancel" ? "selected" : ""}>
+                User Mengcancel
+              </option>
+
+            </select>
+
+          </td>
+
+          <td>
+  <button
+    class="btn-detail"
+    onclick="detailSTJ(${index})">
+    Detail
+  </button>
+</td>
+
+        </tr>
+
+      `;
+    });
+  } catch (error) {
+    console.error(error);
+
+    tbody.innerHTML = `
+      <tr>
+        <td colspan="17">
+          Gagal memuat data STJ
+        </td>
+      </tr>
+    `;
+  }
+}
+
+async function detailSTJ(index) {
+  const item = stjData[index];
+
+  let photoDriver = "";
+
+  try {
+    const response = await fetch(
+      "https://script.google.com/macros/s/AKfycbyxB_Bo2GNbb3EMc2JcPuUNmHHXMCSZndSjGDHiQFJ5R6GW49BxJsdjDCdcgtliZAE/exec?action=readBiodata"
+    );
+
+    const biodata = await response.json();
+
+    const driver = biodata.find(
+      (d) => String(d.badge).trim() === String(item.noBadge).trim()
+    );
+
+    if (driver) {
+      photoDriver = driver.photo;
+    }
+  } catch (err) {
+    console.error(err);
+  }
+
+  document.getElementById("stjPreview").innerHTML = `
+
+<div style="padding:20px;">
+
+<div style="
+  border:4px double #000;
+  padding:20px;
+  border-radius:8px;
+  background:#fff;
+">
+
+ <div class="stj-header">
+
+  <div class="stj-logo-left">
+    <img
+      src="https://i.postimg.cc/NMRDPgT5/GS-dispacer.jpg"
+      alt="GS Logo">
+  </div>
+
+  <div class="stj-header-title">
+
+    <div class="stj-title">
+      SURAT TUGAS JALAN KENDARAAN
+    </div>
+
+    <div class="stj-subtitle">
+      General Service Pertamina Field Jambi
+    </div>
+
+  </div>
+
+  <div class="stj-logo-right">
+    <img
+      src="https://i.postimg.cc/gJbRsgmt/download.png"
+      alt="Pertamina">
+  </div>
+
+</div>
+
+<div class="stj-nomor-surat">
+  <strong>No. Surat :</strong>
+ <span>${generateNomorSurat(index)}</span>
+</div>
+
+<table style="width:100%;">
+
+<tr>
+
+<td width="130" style="padding-left:0; padding-right:10px;">
+
+<img
+  src="${photoDriver}"
+  style="
+    width:120px;
+    height:170px;
+    object-fit:cover;
+    border:2px solid #000;
+    border-radius:4px;
+    margin-left:-20px;
+">
+
+</td>
+
+<td>
+
+<div style="
+  border:1px solid #000;
+  padding:10px;
+  border-radius:4px;
+  margin-left:-15px;
+">
+
+<table style="width:100%; border-collapse:collapse;">
+
+<tr>
+
+<td style="
+  vertical-align:top;
+  width:50%;
+  padding-right:20px;
+">
+
+<table style="width:100%;">
+
+<tr>
+  <td><b>Nama</b></td>
+  <td>: ${item.nama || ""}</td>
+</tr>
+
+<tr>
+  <td><b>No Badge</b></td>
+  <td>: ${item.noBadge || ""}</td>
+</tr>
+
+<tr>
+  <td><b>Fleet Code</b></td>
+  <td>: ${item.fleetCode || ""}</td>
+</tr>
+
+<tr>
+  <td><b>Jenis Kendaraan</b></td>
+  <td>: ${item.jenisKendaraan || ""}</td>
+</tr>
+
+<tr>
+  <td><b>Kontak Driver</b></td>
+  <td>: ${item.driverContact || ""}</td>
+</tr>
+
+<tr>
+  <td><b>Tanggal Permintaan</b></td>
+  <td>: ${item.tanggalPermintaan || ""}</td>
+</tr>
+
+<tr>
+  <td><b>Department</b></td>
+  <td>: ${item.department || ""}</td>
+</tr>
+
+</table>
+
+</td>
+
+<td style="
+  vertical-align:top;
+  width:50%;
+  padding-left:20px;
+">
+
+<table style="width:100%;">
+
+<tr>
+  <td><b>Status Jabatan</b></td>
+  <td>: ${item.statusJabatan || ""}</td>
+</tr>
+
+<tr>
+  <td><b>Tanggal Awal Pekerjaan</b></td>
+  <td>: ${item.tanggalAwalPekerjaan || ""}</td>
+</tr>
+
+<tr>
+  <td><b>Jam Awal Pekerjaan</b></td>
+  <td>: ${item.jamAwalPekerjaan || ""}</td>
+</tr>
+
+<tr>
+  <td><b>Jam Akhir Pekerjaan</b></td>
+  <td>: ${item.jamAkhirPekerjaan || ""}</td>
+</tr>
+
+<tr>
+  <td><b>Pemberi Pekerjaan</b></td>
+  <td>: ${item.pemberiPekerjaan || ""}</td>
+</tr>
+
+<tr>
+  <td><b>Peminta Pekerjaan</b></td>
+  <td>: ${item.pemintaPekerjaan || ""}</td>
+</tr>
+
+<tr>
+  <td><b>Tanggal Akhir Pekerjaan</b></td>
+  <td>: ${item.tanggalAkhirPekerjaan || ""}</td>
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</div>
+
+</td>
+
+</tr>
+
+</table>
+
+<div style="
+  margin-left:130px;
+  margin-top:20px;
+">
+
+<h3 style="margin-bottom:10px;">
+  Summary Pekerjaan
+</h3>
+
+<div style="
+  border:1px solid #000;
+  min-height:120px;
+  padding:15px;
+">
+  ${item.summaryPekerjaan || ""}
+</div>
+
+</div>
+
+<br>
+
+<table
+style="
+  width:calc(100% - 130px);
+  margin-left:130px;
+  margin-top:20px;
+  border-collapse:collapse;
+  text-align:center;
+  border:2px solid #000;
+  table-layout:fixed;
+">
+
+<tr>
+
+<th style="
+  border:2px solid #000;
+  padding:8px;
+  font-weight:bold;
+">
+  Dispatcher
+</th>
+
+<th style="
+  border:2px solid #000;
+  padding:8px;
+  font-weight:bold;
+">
+  Driver
+</th>
+
+<th style="
+  border:2px solid #000;
+  padding:8px;
+  font-weight:bold;
+">
+  User
+</th>
+
+<th style="
+  border:2px solid #000;
+  padding:8px;
+  font-weight:bold;
+">
+  Koordinator
+</th>
+
+</tr>
+
+<tr style="height:100px;">
+
+<td style="border:2px solid #000;"></td>
+<td style="border:2px solid #000;"></td>
+<td style="border:2px solid #000;"></td>
+<td style="border:2px solid #000;"></td>
+
+</tr>
+
+</table>
+</div>
+
+</div>
+
+<button onclick="downloadSTJPDF()" style="
+  padding:10px 16px;
+  background:#d60000;
+  color:#fff;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+  font-weight:bold;
+  margin-bottom:10px;
+">
+  Download PDF
+</button>
+`;
+
+  document.getElementById("stjModal").style.display = "flex";
+}
+
+function closeSTJModal() {
+  document.getElementById("stjModal").style.display = "none";
+}
+
+async function updateStatusSTJ(rowNumber, status) {
+  try {
+    await fetch(
+      "https://script.google.com/macros/s/AKfycbxyTOkKDvhFmQnyFzB1BfK4ZVocf3X7wVQKwAtyvR2i-JrqGekMkgXqwTwQWMop_rOgsA/exec",
+      {
+        method: "POST",
+        mode: "no-cors",
+        body: JSON.stringify({
+          action: "updateStatus",
+          rowNumber: rowNumber,
+          status: status
+        })
+      }
+    );
+
+    console.log("Status berhasil diubah", rowNumber, status);
+  } catch (error) {
+    console.error(error);
+
+    alert("Gagal mengubah status");
+  }
+}
+async function downloadSTJTableAsExcel(bodyTableId, filename) {
+  /* ================= LOADER ================= */
+
+  let loader = document.getElementById("excelDownloadLoader");
+
+  if (!loader) {
+    loader = document.createElement("div");
+
+    loader.id = "excelDownloadLoader";
+
+    loader.style.display = "none";
+
+    loader.innerHTML = `
+      <div class="loader-overlay">
+        <div class="spinner"></div>
+        <p class="loader-text">Sedang membuat file Excel...</p>
+      </div>
+    `;
+
+    document.body.appendChild(loader);
+  }
+
+  loader.style.display = "flex";
+
+  try {
+    /* ================= TABLE ================= */
+
+    const bodyTable = document.getElementById(bodyTableId);
+
+    if (!bodyTable) {
+      alert("Tabel body tidak ditemukan!");
+      return;
+    }
+
+    const table = bodyTable.closest("table");
+
+    const headerDiv = table.querySelector("thead");
+
+    if (!headerDiv) {
+      alert("Header tabel tidak ditemukan!");
+      return;
+    }
+
+    /* ================= HEADER ================= */
+
+    let headers = Array.from(headerDiv.querySelectorAll("th")).map((th) =>
+      th.innerText.trim()
+    );
+
+    /* ❌ HAPUS KOLOM AKSI (terakhir) */
+    headers = headers.slice(0, -1);
+
+    /* ================= ROWS ================= */
+
+    const rows = Array.from(bodyTable.querySelectorAll("tr"));
+
+    /* ================= WORKBOOK ================= */
+
+    const workbook = new ExcelJS.Workbook();
+    const sheet = workbook.addWorksheet("STJ Report");
+
+    /* ================= HEADER ROW ================= */
+
+    sheet.addRow(headers);
+
+    const headerRow = sheet.getRow(1);
+
+    headerRow.height = 25;
+
+    headerRow.eachCell((cell) => {
+      cell.fill = {
+        type: "pattern",
+        pattern: "solid",
+        fgColor: { argb: "658C58" }
+      };
+
+      cell.font = {
+        bold: true,
+        color: { argb: "FFFFFFFF" },
+        size: 12
+      };
+
+      cell.alignment = {
+        vertical: "middle",
+        horizontal: "center"
+      };
+
+      cell.border = {
+        top: { style: "thin" },
+        left: { style: "thin" },
+        bottom: { style: "thin" },
+        right: { style: "thin" }
+      };
+    });
+
+    /* ================= DATA ROW ================= */
+
+    rows.forEach((row) => {
+      const cells = row.querySelectorAll("td");
+
+      const rowValues = [];
+
+      cells.forEach((cell, index) => {
+        // skip kolom aksi
+        if (index === cells.length - 1) return;
+
+        const select = cell.querySelector("select");
+
+        if (select) {
+          // ambil nilai dropdown yang sedang dipilih
+          rowValues.push(select.value);
+        } else {
+          rowValues.push(cell.innerText.trim());
+        }
+      });
+
+      const addedRow = sheet.addRow(rowValues);
+
+      addedRow.eachCell((cell) => {
+        cell.border = {
+          top: { style: "thin" },
+          left: { style: "thin" },
+          bottom: { style: "thin" },
+          right: { style: "thin" }
+        };
+
+        cell.alignment = {
+          vertical: "middle",
+          horizontal: "center",
+          wrapText: true
+        };
+      });
+    });
+
+    /* ================= AUTO WIDTH ================= */
+
+    sheet.columns.forEach((column) => {
+      let maxLength = 15;
+
+      column.eachCell({ includeEmpty: true }, (cell) => {
+        const value = cell.value ? cell.value.toString() : "";
+
+        maxLength = Math.max(maxLength, value.length);
+      });
+
+      column.width = maxLength + 5;
+    });
+
+    /* ================= EXPORT ================= */
+
+    const buffer = await workbook.xlsx.writeBuffer();
+
+    saveAs(
+      new Blob([buffer], {
+        type:
+          "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+      }),
+      filename
+    );
+  } catch (error) {
+    console.error(error);
+    alert("Gagal membuat file Excel!");
+  } finally {
+    loader.style.display = "none";
+  }
+}
+function downloadSTJExcel() {
+  downloadSTJTableAsExcel("stjTableBody", "Report_STJ.xlsx");
+}
+
+function generateNomorSurat(index) {
+  const now = new Date();
+
+  const bulan = String(now.getMonth() + 1).padStart(2, "0");
+  const tahun = now.getFullYear();
+
+  return `STJ/${String(index + 1).padStart(
+    4,
+    "0"
+  )}/GS-Field jambi/${bulan}/${tahun}`;
+}
+
+function downloadSTJPDF() {
+  const element = document.getElementById("stjPreview");
+
+  // cari tombol di dalam container
+  const btn = element.querySelector("button");
+
+  // sembunyikan dulu
+  if (btn) btn.style.display = "none";
+
+  html2canvas(element, {
+    scale: 2,
+    useCORS: true
+  })
+    .then((canvas) => {
+      const imgData = canvas.toDataURL("image/png");
+      const { jsPDF } = window.jspdf;
+
+      const pdf = new jsPDF("p", "mm", "a4");
+
+      const pageWidth = 210;
+      const pageHeight = 297;
+
+      const imgWidth = pageWidth;
+      const imgHeight = (canvas.height * pageWidth) / canvas.width;
+
+      let position = 0;
+
+      if (imgHeight < pageHeight) {
+        pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
+      } else {
+        let heightLeft = imgHeight;
+
+        while (heightLeft > 0) {
+          pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+          heightLeft -= pageHeight;
+          position -= pageHeight;
+
+          if (heightLeft > 0) pdf.addPage();
+        }
+      }
+
+      pdf.save("STJ-Kendaraan.pdf");
+    })
+    .finally(() => {
+      // tampilkan lagi tombolnya
+      if (btn) btn.style.display = "";
+    });
+}
+
+async function refreshSTJData() {
+
+  const tbody = document.getElementById("stjTableBody");
+
+  // Kosongkan isi tabel
+  tbody.innerHTML = "";
+
+  // Muat ulang data
+  await loadReportSTJ();
+
+  console.log("Report STJ berhasil direfresh");
 }
