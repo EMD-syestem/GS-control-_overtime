@@ -2205,6 +2205,13 @@ body {
   grid-row:7;
 }
 
+#jobInputBy{
+  background:#f1f3f5;
+  cursor:not-allowed;
+  color:#003366;
+  font-weight:bold;
+}
+
 .report-container{
   background:#fff;
   padding:20px;
