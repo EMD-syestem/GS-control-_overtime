@@ -3700,12 +3700,12 @@ async function loadReportSTJ() {
 
               <option value="Open"
                 ${item.status === "Open" ? "selected" : ""}>
-                Open
+                Open (On Job )
               </option>
 
               <option value="Close"
                 ${item.status === "Close" ? "selected" : ""}>
-                Close
+                Close Job
               </option>
 
               <option value="Kendaraan Full Job"
