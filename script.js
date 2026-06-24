@@ -6,18 +6,20 @@ const users = {
     role: "admin" // bisa buka semua
   },
 
-  "dian@devimandiri.com": {
-    password: "Dian2025",
+  "anggito@pertamina.com": {
+    password: "gito2026",
     role: "admin" // bisa buka semua
   },
-
+  
+  
   "suharso@pertamina.com": {
     password: "acok2026",
     role: "admin" // bisa buka semua
   },
-
-  "anggito@pertamina.com": {
-    password: "gito2026",
+  
+  
+  "dian@devimandiri.com": {
+    password: "Dian2025",
     role: "admin" // bisa buka semua
   },
 
@@ -26,18 +28,18 @@ const users = {
     role: "field" // hanya KRP FIELD
   },
 
-  "syahrul@pertamina.com": {
+  "syahrul@devimandiri.com": {
     password: "syahrul2026",
     role: "field" // hanya KRP FIELD
   },
 
-  "vino@dispatcher1.com": {
-    password: "vino123",
+  "revino@devimandiri.com": {
+    password: "vino2026",
     role: "field" // hanya KRP FIELD
   },
 
-  "rahmat@dispatcher.com": {
-    password: "rahmat123",
+  "rahmat@devimandiri.com": {
+    password: "rahmat2026",
     role: "field" // hanya KRP FIELD
   },
 
@@ -52,12 +54,12 @@ const userPhotos = {
   "derihanggara86@gmail.com": "https://i.postimg.cc/qR1C6dWC/silvia.png",
   "caesar@devimandiri.com": "https://i.postimg.cc/wBg2ZtdS/admint.jpg",
   "ojie@devimandiri.com": "https://i.postimg.cc/wBg2ZtdS/admint.jpg",
-  "suharso@pertamina.com": "https://i.postimg.cc/wBg2ZtdS/admint.jpg",
-  "anggito@pertamina.com": "https://i.postimg.cc/wBg2ZtdS/admint.jpg",
-  "syahrul@pertamina.com": "https://i.postimg.cc/wBg2ZtdS/admint.jpg",
-  "vino@dispatcher1.com": "https://i.postimg.cc/wBg2ZtdS/admint.jpg",
-  "rahmat@dispatcher.com": "https://i.postimg.cc/wBg2ZtdS/admint.jpg",
-  "dian@devimandiri.com": "https://i.postimg.cc/wBg2ZtdS/admint.jpg"
+  "suharso@pertamina.com": "https://i.postimg.cc/MK0X4cQ7/acok.jpg",
+  "anggito@pertamina.com": "https://i.postimg.cc/qR1C6dWC/silvia.png",
+  "syahrul@devimandiri.com": "https://i.postimg.cc/mDDj37mb/sahrul.jpg",
+  "revino@devimandiri.com": "https://i.postimg.cc/jdNpJrWL/vino-g.jpg",
+  "dian@devimandiri.com": "https://i.postimg.cc/V6mQzZs4/bajil.jpg",
+  "rahmat@devimandiri.com": "https://i.postimg.cc/0j4BKVvd/rahmat.jpg"
 };
 
 function applyRole(role) {
@@ -594,17 +596,24 @@ function hitungJamKerja() {
   let totalJamLembur = 0;
 
   function hitungDurasi(start, end) {
-    if (!start || !end) return 0;
-    if (end === "24:00") {
-      end = "00:00";
-    }
-    let startTime = new Date(`1970-01-01T${start}:00`);
-    let endTime = new Date(`1970-01-01T${end}:00`);
-    if (endTime < startTime) {
-      endTime.setDate(endTime.getDate() + 1);
-    }
-    return (endTime - startTime) / (1000 * 60 * 60);
+  if (!start || !end) return 0;
+
+  let startTime = new Date(`1970-01-01T${start}:00`);
+  let endTime;
+
+  // Anggap 23:59 sebagai 24:00
+  if (end === "23:59") {
+    endTime = new Date("1970-01-02T00:00:00");
+  } else {
+    endTime = new Date(`1970-01-01T${end}:00`);
   }
+
+  if (endTime < startTime) {
+    endTime.setDate(endTime.getDate() + 1);
+  }
+
+  return (endTime - startTime) / (1000 * 60 * 60);
+}
   let sesiLembur1 = hitungDurasi(jamAwal1, jamAkhir1);
   let sesiLembur2 = hitungDurasi(jamAwal2, jamAkhir2);
   let sesiLembur3 = hitungDurasi(jamAwal3, jamAkhir3);
@@ -632,8 +641,8 @@ function hitungLembur() {
   var tanggal = document.getElementById("tanggal").value;
   var hari = document.getElementById("hari").value;
   const liburKhusus = document.getElementById("liburKhusus").checked;
-  var jamKerja = parseInt(document.getElementById("jamKerja").value);
-  var jamLembur = parseInt(document.getElementById("jamLembur").value);
+  var jamKerja = parseFloat(document.getElementById("jamKerja").value);
+  var jamLembur = parseFloat(document.getElementById("jamLembur").value);
   var jamAwal1 = document.getElementById("jamAwal1").value;
   var jamAkhir1 = document.getElementById("jamAkhir1").value;
   var jamAwal2 = document.getElementById("jamAwal2").value;
@@ -701,7 +710,7 @@ function hitungLembur() {
   };
 
   fetch(
-    "https://script.google.com/macros/s/AKfycbyxB_Bo2GNbb3EMc2JcPuUNmHHXMCSZndSjGDHiQFJ5R6GW49BxJsdjDCdcgtliZAE/exec",
+    "https://script.google.com/macros/s/AKfycbytyecx9KV5KOwEdIQT5758jJquiFfHFbYcTDVEe9Qz_acNhMxCMEcA6tCfW9Gk-JZfQQ/exec",
     {
       method: "POST",
       body: JSON.stringify(data)
@@ -718,16 +727,29 @@ function hitungLembur() {
   // Tampilkan alert untuk penyimpanan yang berhasil
   alert("Laporan berhasil disimpan!");
 
-  function calculateSessionOvertime(jamAwal, jamAkhir) {
-    if (!jamAwal || !jamAkhir) return 0;
+ function calculateSessionOvertime(jamAwal, jamAkhir) {
+  if (!jamAwal || !jamAkhir) return 0;
 
-    const start = new Date(`1970-01-01T${jamAwal}:00`);
-    const end = new Date(`1970-01-01T${jamAkhir}:00`);
+  const start = new Date(`1970-01-01T${jamAwal}:00`);
 
-    const diff = (end - start) / (1000 * 60 * 60);
+  let end;
 
-    return diff > 0 ? diff : 0;
+  // Jika 23:59 dianggap 24:00
+  if (jamAkhir === "23:59") {
+    end = new Date("1970-01-02T00:00:00");
+  } else {
+    end = new Date(`1970-01-01T${jamAkhir}:00`);
   }
+
+  // Jika melewati tengah malam
+  if (end < start) {
+    end.setDate(end.getDate() + 1);
+  }
+
+  const diff = (end - start) / (1000 * 60 * 60);
+
+  return diff > 0 ? diff : 0;
+}
 
   function calculateOvertime(hari, jamKerja, jamLembur, liburKhusus = false) {
     let totalLembur = 0;
@@ -884,7 +906,7 @@ function loadReportDinasLuar() {
   const role = localStorage.getItem("userRole") || "admin";
 
   fetch(
-    `https://script.google.com/macros/s/AKfycbyxB_Bo2GNbb3EMc2JcPuUNmHHXMCSZndSjGDHiQFJ5R6GW49BxJsdjDCdcgtliZAE/exec?action=readDinasLuar&role=${role}`
+    `https://script.google.com/macros/s/AKfycbytyecx9KV5KOwEdIQT5758jJquiFfHFbYcTDVEe9Qz_acNhMxCMEcA6tCfW9Gk-JZfQQ/exec?action=readDinasLuar&role=${role}`
   )
     .then((res) => res.json())
 
@@ -968,12 +990,17 @@ function resetFilterDinasLuar() {
 /* ================= LOAD REPORT ================= */
 
 function loadReport() {
-  const role = localStorage.getItem("userRole") || "admin";
+
+  const role =
+    localStorage.getItem("userRole") || "admin";
+
+  const isUserAdmin =
+    localStorage.getItem("userRole") === "admin";
 
   console.log("ROLE:", role);
 
   fetch(
-    `https://script.google.com/macros/s/AKfycbyxB_Bo2GNbb3EMc2JcPuUNmHHXMCSZndSjGDHiQFJ5R6GW49BxJsdjDCdcgtliZAE/exec?action=readWithRow&role=${role}`
+    `https://script.google.com/macros/s/AKfycbytyecx9KV5KOwEdIQT5758jJquiFfHFbYcTDVEe9Qz_acNhMxCMEcA6tCfW9Gk-JZfQQ/exec?action=readWithRow&role=${role}`
   )
     .then((response) => response.json())
 
@@ -988,12 +1015,20 @@ function loadReport() {
 
       tbody.innerHTML = "";
 
-      data.forEach((item) => {
+       data.forEach((item) => {
         const row = item.data;
 
         const rowNumber = item.rowNumber;
+
         let tr = document.createElement("tr");
 
+        if (row[20] === "Approved") {
+          tr.classList.add("approved-row");
+        }
+         
+         if (item.color === "#ff0000") {
+  tr.classList.add("edited-row");
+}
         /* ================= FORMAT TANGGAL ================= */
 
         let tanggal = "";
@@ -1018,161 +1053,6 @@ function loadReport() {
             minute: "2-digit"
           });
         }
-
-        tr.innerHTML = `
-
-        <td>${row[0] || ""}</td>
-        <td>${tanggal}</td>
-        <td>${row[2] || ""}</td>
-        <td>${row[3] || ""}</td>
-        <td>${row[4] || ""}</td>
-        <td>${row[5] || ""}</td>
-
-        <td>${formatJam(row[6])}</td>
-        <td>${formatJam(row[7])}</td>
-
-        <td>${formatJam(row[8])}</td>
-        <td>${formatJam(row[9])}</td>
-
-        <td>${formatJam(row[10])}</td>
-        <td>${formatJam(row[11])}</td>
-
-        <td>${formatJam(row[12])}</td>
-        <td>${formatJam(row[13])}</td>
-
-        <td>${row[14] || ""}</td>
-        <td>${row[15] || ""}</td>
-        <td>${row[16] || ""}</td>
-        <td>${row[17] || ""}</td>
-
-      <td>${row[18] || ""}</td>
-
-<td>
-
-  <button
-    class="delete-btn"
-    onclick="deleteReport(${rowNumber})">
-
-    🗑 Hapus
-
-  </button>
-
-</td>
-
-      `;
-
-        tbody.appendChild(tr);
-      });
-    })
-
-    .catch((error) => {
-      console.error("Gagal load report:", error);
-    });
-}
-function deleteReport(rowNumber) {
-  const konfirmasi = confirm("Yakin ingin menghapus data ini?");
-
-  if (!konfirmasi) return;
-
-  fetch(
-    `https://script.google.com/macros/s/AKfycbyxB_Bo2GNbb3EMc2JcPuUNmHHXMCSZndSjGDHiQFJ5R6GW49BxJsdjDCdcgtliZAE/exec?action=delete&row=${rowNumber}`
-  )
-    .then((response) => response.json())
-    .then((result) => {
-      if (result.success) {
-        alert("Data berhasil dihapus");
-
-        loadReport();
-      }
-    })
-    .catch((error) => {
-      console.error(error);
-
-      alert("Gagal menghapus data");
-    });
-}
-/* ================= FILTER TANGGAL ================= */
-
-function filterTanggal() {
-  const filterDriver = document
-    .getElementById("filterDriver")
-    .value.toLowerCase();
-
-  const dari = document.getElementById("filterStartDate").value;
-
-  const sampai = document.getElementById("filterEndDate").value;
-
-  const role = localStorage.getItem("userRole") || "admin";
-
-  fetch(
-    `https://script.google.com/macros/s/AKfycbyxB_Bo2GNbb3EMc2JcPuUNmHHXMCSZndSjGDHiQFJ5R6GW49BxJsdjDCdcgtliZAE/exec?action=read&role=${role}`
-  )
-    .then((response) => response.json())
-
-    .then((data) => {
-      const tbody = document.querySelector("#reportTable tbody");
-
-      tbody.innerHTML = "";
-
-      data.forEach((row) => {
-        /* ================= AMBIL TANGGAL ASLI ================= */
-
-        let tanggalFormat = "";
-
-        if (row[1]) {
-          tanggalFormat = row[1].split("T")[0];
-        }
-
-        /* ================= FILTER DRIVER ================= */
-
-        const namaDriver = (row[0] || "").toLowerCase();
-
-        if (filterDriver && !namaDriver.includes(filterDriver)) {
-          return;
-        }
-
-        /* ================= FILTER 1 TANGGAL ================= */
-
-        if (dari && !sampai) {
-          if (tanggalFormat !== dari) {
-            return;
-          }
-        }
-
-        /* ================= FILTER RANGE ================= */
-
-        if (dari && sampai) {
-          if (tanggalFormat < dari || tanggalFormat > sampai) {
-            return;
-          }
-        }
-
-        /* ================= FORMAT TANGGAL ================= */
-
-        let tanggal = "";
-
-        if (tanggalFormat) {
-          const parts = tanggalFormat.split("-");
-
-          tanggal = `${parts[2]}/${parts[1]}/${parts[0]}`;
-        }
-
-        /* ================= FORMAT JAM ================= */
-
-        function formatJam(jamData) {
-          if (!jamData) return "";
-
-          if (typeof jamData === "string" && jamData.includes("T")) {
-            return jamData.split("T")[1].substring(0, 5);
-          }
-
-          return jamData;
-        }
-
-        /* ================= BUAT ROW ================= */
-
-        let tr = document.createElement("tr");
-
         tr.innerHTML = `
 
         <td>${row[0] || ""}</td>
@@ -1201,6 +1081,32 @@ function filterTanggal() {
 
         <td>${row[18] || ""}</td>
 
+        <td>
+
+  <button
+    class="delete-btn"
+    onclick="deleteReport(${rowNumber})">
+    🗑 Hapus
+  </button>
+
+  ${isUserAdmin ? `
+
+    <button
+      class="edit-btn"
+      onclick="editReport(${rowNumber})">
+      ✏ Edit
+    </button>
+
+    <button
+      class="approval-btn"
+      onclick="approvalReport(${rowNumber})">
+      ✔ Approve
+    </button>
+
+  ` : ""}
+
+</td>
+
       `;
 
         tbody.appendChild(tr);
@@ -1208,10 +1114,513 @@ function filterTanggal() {
     })
 
     .catch((error) => {
-      console.error("Gagal filter report:", error);
+      console.error("Gagal load report:", error);
     });
 }
 
+function deleteReport(rowNumber) {
+  const konfirmasi = confirm("Yakin ingin menghapus data ini?");
+
+  if (!konfirmasi) return;
+
+  fetch(
+    `https://script.google.com/macros/s/AKfycbytyecx9KV5KOwEdIQT5758jJquiFfHFbYcTDVEe9Qz_acNhMxCMEcA6tCfW9Gk-JZfQQ/exec?action=delete&row=${rowNumber}`
+  )
+    .then((response) => response.json())
+    .then((result) => {
+      if (result.success) {
+        alert("Data berhasil dihapus");
+
+        loadReport();
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+
+      alert("Gagal menghapus data");
+    });
+}
+
+function approvalReport(rowNumber) {
+
+  const isUserAdmin =
+    localStorage.getItem("userRole") === "admin";
+
+  if (!isUserAdmin) {
+    alert("Hanya admin yang dapat melakukan approval");
+    return;
+  }
+
+  if (!confirm("Approve data ini?")) {
+    return;
+  }
+
+  fetch(
+    "https://script.google.com/macros/s/AKfycbytyecx9KV5KOwEdIQT5758jJquiFfHFbYcTDVEe9Qz_acNhMxCMEcA6tCfW9Gk-JZfQQ/exec",
+    {
+      method: "POST",
+      body: JSON.stringify({
+        action: "approve",
+        rowNumber: rowNumber
+      })
+    }
+  )
+  .then(res => res.json())
+  .then(data => {
+    if (data.success) {
+      alert("Data berhasil di approve");
+      loadReport();
+    }
+  })
+  .catch(err => {
+    console.error(err);
+    alert("Gagal approve data");
+  });
+}
+
+function editReport(rowNumber) {
+
+  const isUserAdmin =
+    localStorage.getItem("userRole") === "admin";
+
+  if (!isUserAdmin) {
+    alert("Hanya admin yang dapat mengedit data");
+    return;
+  }
+
+  const btn = document.querySelector(
+    `button[onclick="editReport(${rowNumber})"]`
+  );
+
+  const tr = btn.closest("tr");
+
+  const tds = tr.querySelectorAll("td");
+
+  for (let i = 0; i < tds.length - 1; i++) {
+
+    const value = tds[i].innerText;
+
+    tds[i].innerHTML = `
+      <input
+        type="text"
+        value="${value}"
+        style="width:100%;padding:4px;">
+    `;
+  }
+
+  tds[tds.length - 1].innerHTML = `
+    <button
+      class="save-btn"
+      onclick="saveReport(${rowNumber},this)">
+      💾 Simpan
+    </button>
+  `;
+}
+
+function fixTimeFormat(time) {
+if (!time) return "";
+return String(time).replace(".", ":");
+}
+
+function calculateSessionOvertime(jamAwal, jamAkhir) {
+
+if (!jamAwal || !jamAkhir) return 0;
+
+jamAwal = fixTimeFormat(jamAwal);
+jamAkhir = fixTimeFormat(jamAkhir);
+
+const start = new Date(`1970-01-01T${jamAwal}:00`);
+const end = new Date(`1970-01-01T${jamAkhir}:00`);
+
+if (isNaN(start) || isNaN(end)) return 0;
+
+let diff = (end - start) / (1000 * 60 * 60);
+
+return diff > 0 ? diff : 0;
+}
+
+function calculateOvertime(
+hari,
+jamKerja,
+jamLembur,
+liburKhusus = false
+) {
+
+let totalLembur = 0;
+
+const isHariLibur =
+hari === "Sabtu" ||
+hari === "Minggu" ||
+liburKhusus;
+
+if (isHariLibur) {
+
+if (jamLembur <= 8) {
+
+  totalLembur = jamLembur * 2;
+
+} else {
+
+  totalLembur = 8 * 2;
+
+  let sisaJam = jamLembur - 8;
+
+  if (sisaJam >= 1) {
+    totalLembur += 3;
+    sisaJam--;
+  }
+
+  if (sisaJam >= 1) {
+    totalLembur += 4;
+    sisaJam--;
+  }
+
+  if (sisaJam > 0) {
+    totalLembur += sisaJam * 4;
+  }
+
+}
+
+} else {
+
+if (jamLembur >= 1) {
+  totalLembur += 1.5;
+  jamLembur--;
+}
+
+if (jamLembur > 0) {
+  totalLembur += jamLembur * 2;
+}
+
+}
+
+return totalLembur;
+}
+
+function saveReport(rowNumber, btn) {
+  
+  const isUserAdmin =
+    localStorage.getItem("userRole") === "admin";
+
+  if (!isUserAdmin) {
+    alert("Hanya admin yang dapat menyimpan perubahan");
+    return;
+  }
+
+
+const tr = btn.closest("tr");
+const inputs = tr.querySelectorAll("input");
+
+const values = Array.from(inputs).map(input => input.value);
+
+const hari = values[2];
+
+const jamPertama =
+calculateSessionOvertime(values[6], values[7]);
+
+const jamKedua =
+calculateSessionOvertime(values[8], values[9]);
+
+const jamKetiga =
+calculateSessionOvertime(values[10], values[11]);
+
+const jamKeempat =
+calculateSessionOvertime(values[12], values[13]);
+
+const totalJamLembur =
+jamPertama +
+jamKedua +
+jamKetiga +
+jamKeempat;
+
+const totalJamKerja =
+8 + totalJamLembur;
+
+const hasilLembur =
+calculateOvertime(
+hari,
+totalJamKerja,
+totalJamLembur,
+false
+);
+
+values[3] = totalJamKerja;
+values[4] = totalJamLembur;
+values[5] = hasilLembur;
+
+values[14] = jamPertama;
+values[15] = jamKedua;
+values[16] = jamKetiga;
+values[17] = jamKeempat;
+
+fetch(
+"https://script.google.com/macros/s/AKfycbytyecx9KV5KOwEdIQT5758jJquiFfHFbYcTDVEe9Qz_acNhMxCMEcA6tCfW9Gk-JZfQQ/exec",
+{
+method: "POST",
+body: JSON.stringify({
+action: "edit",
+rowNumber: rowNumber,
+values: values
+})
+}
+)
+.then(res => res.json())
+.then(data => {
+
+if (data.success) {
+
+  tr.classList.add("edited-row");
+
+  alert("Data berhasil diupdate");
+
+  setTimeout(() => {
+    loadReport();
+  }, 1000);
+
+}
+
+})
+.catch(err => {
+
+console.error(err);
+
+alert("Gagal update data");
+
+});
+
+}
+/* ================= FILTER TANGGAL ================= */
+
+function filterTanggal() {
+
+  const filterDriver =
+    document
+      .getElementById("filterDriver")
+      .value
+      .toLowerCase();
+
+  const dari =
+    document.getElementById("filterStartDate").value;
+
+  const sampai =
+    document.getElementById("filterEndDate").value;
+
+  const role =
+    localStorage.getItem("userRole") || "admin";
+
+  const isUserAdmin =
+    role === "admin";
+
+  fetch(
+    `https://script.google.com/macros/s/AKfycbytyecx9KV5KOwEdIQT5758jJquiFfHFbYcTDVEe9Qz_acNhMxCMEcA6tCfW9Gk-JZfQQ/exec?action=readWithRow&role=${role}`
+  )
+    .then(response => response.json())
+
+    .then(data => {
+
+      const tbody =
+        document.querySelector("#reportTable tbody");
+
+      tbody.innerHTML = "";
+
+      data.forEach(item => {
+
+        const row = item.data;
+        const rowNumber = item.rowNumber;
+
+        /* ================= TANGGAL ASLI ================= */
+
+        let tanggalFormat = "";
+
+        if (row[1]) {
+
+          if (typeof row[1] === "string") {
+            tanggalFormat = row[1].split("T")[0];
+          } else {
+            tanggalFormat =
+              new Date(row[1])
+                .toISOString()
+                .split("T")[0];
+          }
+
+        }
+
+        /* ================= FILTER DRIVER ================= */
+
+        const namaDriver =
+          (row[0] || "").toLowerCase();
+
+        if (
+          filterDriver &&
+          !namaDriver.includes(filterDriver)
+        ) {
+          return;
+        }
+
+        /* ================= FILTER TANGGAL ================= */
+
+        if (dari && !sampai) {
+
+          if (tanggalFormat !== dari) {
+            return;
+          }
+
+        }
+
+        /* ================= FILTER RANGE ================= */
+
+        if (dari && sampai) {
+
+          if (
+            tanggalFormat < dari ||
+            tanggalFormat > sampai
+          ) {
+            return;
+          }
+
+        }
+
+        /* ================= FORMAT TANGGAL ================= */
+
+        let tanggal = "";
+
+        if (tanggalFormat) {
+
+          const parts =
+            tanggalFormat.split("-");
+
+          tanggal =
+            `${parts[2]}/${parts[1]}/${parts[0]}`;
+
+        }
+
+        /* ================= FORMAT JAM ================= */
+
+        function formatJam(jamData) {
+
+          if (!jamData) return "";
+
+          try {
+
+            const jam =
+              new Date(jamData);
+
+            if (!isNaN(jam)) {
+
+              return jam.toLocaleTimeString(
+                "id-ID",
+                {
+                  hour: "2-digit",
+                  minute: "2-digit"
+                }
+              );
+
+            }
+
+          } catch (e) {}
+
+          if (
+            typeof jamData === "string" &&
+            jamData.includes("T")
+          ) {
+
+            return jamData
+              .split("T")[1]
+              .substring(0, 5);
+
+          }
+
+          return jamData;
+
+        }
+
+        /* ================= BUAT ROW ================= */
+
+        let tr =
+          document.createElement("tr");
+
+        /* ================= WARNA APPROVED ================= */
+
+        if (row[20] === "Approved") {
+          tr.classList.add("approved-row");
+        }
+
+        /* ================= WARNA EDITED ================= */
+
+        if (item.color === "#ff0000") {
+          tr.classList.add("edited-row");
+        }
+
+        tr.innerHTML = `
+
+          <td>${row[0] || ""}</td>
+          <td>${tanggal}</td>
+          <td>${row[2] || ""}</td>
+          <td>${row[3] || ""}</td>
+          <td>${row[4] || ""}</td>
+          <td>${row[5] || ""}</td>
+
+          <td>${formatJam(row[6])}</td>
+          <td>${formatJam(row[7])}</td>
+
+          <td>${formatJam(row[8])}</td>
+          <td>${formatJam(row[9])}</td>
+
+          <td>${formatJam(row[10])}</td>
+          <td>${formatJam(row[11])}</td>
+
+          <td>${formatJam(row[12])}</td>
+          <td>${formatJam(row[13])}</td>
+
+          <td>${row[14] || ""}</td>
+          <td>${row[15] || ""}</td>
+          <td>${row[16] || ""}</td>
+          <td>${row[17] || ""}</td>
+
+          <td>${row[18] || ""}</td>
+
+          <td>
+
+            <button
+              class="delete-btn"
+              onclick="deleteReport(${rowNumber})">
+              🗑 Hapus
+            </button>
+
+            ${isUserAdmin ? `
+
+              <button
+                class="edit-btn"
+                onclick="editReport(${rowNumber})">
+                ✏ Edit
+              </button>
+
+              <button
+                class="approval-btn"
+                onclick="approvalReport(${rowNumber})">
+                ✔ Approve
+              </button>
+
+            ` : ""}
+
+          </td>
+
+        `;
+
+        tbody.appendChild(tr);
+
+      });
+
+    })
+
+    .catch(error => {
+      console.error(
+        "Gagal filter report:",
+        error
+      );
+    });
+
+}
 /* =========================================================
    DOWNLOAD REPORT EXCEL
 ========================================================= */
@@ -1452,7 +1861,7 @@ function filterMonthlyReport() {
   const role = localStorage.getItem("userRole") || "admin";
 
   fetch(
-    `https://script.google.com/macros/s/AKfycbyxB_Bo2GNbb3EMc2JcPuUNmHHXMCSZndSjGDHiQFJ5R6GW49BxJsdjDCdcgtliZAE/exec?action=read&role=${role}`
+    `https://script.google.com/macros/s/AKfycbytyecx9KV5KOwEdIQT5758jJquiFfHFbYcTDVEe9Qz_acNhMxCMEcA6tCfW9Gk-JZfQQ/exec?action=read&role=${role}`
   )
     .then((response) => response.json())
 
@@ -1591,7 +2000,7 @@ function loadMonthlyReport() {
   const role = localStorage.getItem("userRole") || "admin";
 
   fetch(
-    `https://script.google.com/macros/s/AKfycbyxB_Bo2GNbb3EMc2JcPuUNmHHXMCSZndSjGDHiQFJ5R6GW49BxJsdjDCdcgtliZAE/exec?action=read&role=${role}`
+    `https://script.google.com/macros/s/AKfycbytyecx9KV5KOwEdIQT5758jJquiFfHFbYcTDVEe9Qz_acNhMxCMEcA6tCfW9Gk-JZfQQ/exec?action=read&role=${role}`
   )
     .then((response) => response.json())
 
@@ -1883,15 +2292,15 @@ function generateDriverMatrix() {
 
   Promise.all([
     fetch(
-      `https://script.google.com/macros/s/AKfycbyxB_Bo2GNbb3EMc2JcPuUNmHHXMCSZndSjGDHiQFJ5R6GW49BxJsdjDCdcgtliZAE/exec?action=read&role=${role}`
+      `https://script.google.com/macros/s/AKfycbytyecx9KV5KOwEdIQT5758jJquiFfHFbYcTDVEe9Qz_acNhMxCMEcA6tCfW9Gk-JZfQQ/exec?action=read&role=${role}`
     ).then((r) => r.json()),
 
     fetch(
-      `https://script.google.com/macros/s/AKfycbyxB_Bo2GNbb3EMc2JcPuUNmHHXMCSZndSjGDHiQFJ5R6GW49BxJsdjDCdcgtliZAE/exec?action=readDinasLuar&role=${role}`
+      `https://script.google.com/macros/s/AKfycbytyecx9KV5KOwEdIQT5758jJquiFfHFbYcTDVEe9Qz_acNhMxCMEcA6tCfW9Gk-JZfQQ/exec?action=readDinasLuar&role=${role}`
     ).then((r) => r.json()),
 
     fetch(
-      `https://script.google.com/macros/s/AKfycbyxB_Bo2GNbb3EMc2JcPuUNmHHXMCSZndSjGDHiQFJ5R6GW49BxJsdjDCdcgtliZAE/exec?action=readBiodata`
+      `https://script.google.com/macros/s/AKfycbytyecx9KV5KOwEdIQT5758jJquiFfHFbYcTDVEe9Qz_acNhMxCMEcA6tCfW9Gk-JZfQQ/exec?action=readBiodata`
     ).then((r) => r.json())
   ])
 
@@ -2618,7 +3027,7 @@ function generateOvertimeChart(startDate = null, endDate = null) {
   const role = localStorage.getItem("userRole") || "admin";
 
   fetch(
-    `https://script.google.com/macros/s/AKfycbyxB_Bo2GNbb3EMc2JcPuUNmHHXMCSZndSjGDHiQFJ5R6GW49BxJsdjDCdcgtliZAE/exec?action=read&role=${role}`,
+    `https://script.google.com/macros/s/AKfycbytyecx9KV5KOwEdIQT5758jJquiFfHFbYcTDVEe9Qz_acNhMxCMEcA6tCfW9Gk-JZfQQ/exec?action=read&role=${role}`,
     {
       method: "GET",
       mode: "cors"
@@ -2645,7 +3054,7 @@ function generateOvertimeChart(startDate = null, endDate = null) {
       /* ================= LOAD BIODATA ================= */
 
       const biodataResponse = await fetch(
-        "https://script.google.com/macros/s/AKfycbyxB_Bo2GNbb3EMc2JcPuUNmHHXMCSZndSjGDHiQFJ5R6GW49BxJsdjDCdcgtliZAE/exec?action=readBiodata"
+        "https://script.google.com/macros/s/AKfycbytyecx9KV5KOwEdIQT5758jJquiFfHFbYcTDVEe9Qz_acNhMxCMEcA6tCfW9Gk-JZfQQ/exec?action=readBiodata"
       );
 
       const biodataDriver = await biodataResponse.json();
@@ -3088,7 +3497,7 @@ window.addEventListener("load", loadDriverBiodata);
 
 function loadDriverBiodata() {
   fetch(
-    "https://script.google.com/macros/s/AKfycbyxB_Bo2GNbb3EMc2JcPuUNmHHXMCSZndSjGDHiQFJ5R6GW49BxJsdjDCdcgtliZAE/exec?action=readBiodata"
+    "https://script.google.com/macros/s/AKfycbytyecx9KV5KOwEdIQT5758jJquiFfHFbYcTDVEe9Qz_acNhMxCMEcA6tCfW9Gk-JZfQQ/exec?action=readBiodata"
   )
     .then((res) => res.json())
     .then((data) => {
@@ -3197,7 +3606,7 @@ function generateDriverChart(useDateFilter = false) {
   const ctx = canvas.getContext("2d");
 
   fetch(
-    `https://script.google.com/macros/s/AKfycbyxB_Bo2GNbb3EMc2JcPuUNmHHXMCSZndSjGDHiQFJ5R6GW49BxJsdjDCdcgtliZAE/exec?action=read&role=${role}`
+    `https://script.google.com/macros/s/AKfycbytyecx9KV5KOwEdIQT5758jJquiFfHFbYcTDVEe9Qz_acNhMxCMEcA6tCfW9Gk-JZfQQ/exec?action=read&role=${role}`
   )
     .then((response) => response.json())
     .then((data) => {
@@ -3457,7 +3866,7 @@ function submitDinasLuar() {
   };
 
   fetch(
-    "https://script.google.com/macros/s/AKfycbyxB_Bo2GNbb3EMc2JcPuUNmHHXMCSZndSjGDHiQFJ5R6GW49BxJsdjDCdcgtliZAE/exec",
+    "https://script.google.com/macros/s/AKfycbytyecx9KV5KOwEdIQT5758jJquiFfHFbYcTDVEe9Qz_acNhMxCMEcA6tCfW9Gk-JZfQQ/exec",
     {
       method: "POST",
       body: JSON.stringify(data)
@@ -3478,7 +3887,7 @@ window.addEventListener("load", () => {
 });
 window.addEventListener("load", () => {
   fetch(
-    "https://script.google.com/macros/s/AKfycbyxB_Bo2GNbb3EMc2JcPuUNmHHXMCSZndSjGDHiQFJ5R6GW49BxJsdjDCdcgtliZAE/exec?action=readBiodata"
+    "https://script.google.com/macros/s/AKfycbytyecx9KV5KOwEdIQT5758jJquiFfHFbYcTDVEe9Qz_acNhMxCMEcA6tCfW9Gk-JZfQQ/exec?action=readBiodata"
   )
     .then((res) => res.json())
     .then((data) => {
@@ -3700,12 +4109,12 @@ async function loadReportSTJ() {
 
               <option value="Open"
                 ${item.status === "Open" ? "selected" : ""}>
-                Open (On Job )
+                Open
               </option>
 
               <option value="Close"
                 ${item.status === "Close" ? "selected" : ""}>
-                Close Job
+                Close
               </option>
 
               <option value="Kendaraan Full Job"
@@ -3870,7 +4279,7 @@ async function detailSTJ(index) {
 </tr>
 
 <tr>
-  <td><b>Jenis Kendaraan</b></td>
+  <td><b>Vehicle Type</b></td>
   <td>: ${item.jenisKendaraan || ""}</td>
 </tr>
 
@@ -3880,12 +4289,12 @@ async function detailSTJ(index) {
 </tr>
 
 <tr>
-  <td><b>Status Jabatan</b></td>
+  <td><b>Position Status</b></td>
   <td>: ${item.statusJabatan || ""}</td>
 </tr>
 
 <tr>
-  <td><b>Kontak Driver</b></td>
+  <td><b>Driver Contact</b></td>
   <td>: ${item.driverContact || ""}</td>
 </tr>
 
@@ -3937,7 +4346,6 @@ async function detailSTJ(index) {
 </tr>
 
 </table>
-
 
 </td>
 
@@ -4310,7 +4718,6 @@ function downloadSTJPDF() {
 }
 
 async function refreshSTJData() {
-
   const tbody = document.getElementById("stjTableBody");
 
   // Kosongkan isi tabel
