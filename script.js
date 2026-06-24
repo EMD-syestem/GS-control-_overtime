@@ -10,7 +10,11 @@ const users = {
     password: "gito2026",
     role: "admin" // bisa buka semua
   },
-  
+
+  "dian@devimandiri.com": {
+    password: "Dian2025",
+    role: "admin" // bisa buka semua
+  },
   
   "suharso@pertamina.com": {
     password: "acok2026",
