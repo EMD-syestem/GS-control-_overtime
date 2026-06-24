@@ -16,12 +16,7 @@ const users = {
     password: "acok2026",
     role: "admin" // bisa buka semua
   },
-  
-  
-  "dian@devimandiri.com": {
-    password: "Dian2025",
-    role: "admin" // bisa buka semua
-  },
+
 
   "caesar@devimandiri.com": {
     password: "cs2026",
