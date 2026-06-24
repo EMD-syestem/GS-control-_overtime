@@ -1085,7 +1085,7 @@ body {
 
   top: 0;
 
-  z-index: 10;
+  z-index: 20;
 
   background: linear-gradient(135deg, #5c8d59, #4a7c59);
 
@@ -1128,11 +1128,10 @@ body {
 
 #reportTable th:last-child,
 #reportTable td:last-child {
-  min-width: 300px;
-
-  white-space: normal;
-
-  text-align: left;
+  min-width: 120px;
+  width: 120px;
+  text-align: center;
+  white-space: nowrap;
 }
 
 /* ================= SCROLLBAR ================= */
@@ -1168,6 +1167,139 @@ body {
   flex-wrap: wrap;
 
   margin-bottom: 20px;
+}
+
+/* ===================================================== */
+/* ============== FREEZE SAMPAI JAM AKHIR 3 ============ */
+/* ===================================================== */
+
+/* Nama Driver */
+#reportTable th:nth-child(1),
+#reportTable td:nth-child(1) {
+  position: sticky;
+  left: 0;
+  z-index: 15;
+  background: white;
+  min-width: 160px;
+}
+
+/* Tanggal */
+#reportTable th:nth-child(2),
+#reportTable td:nth-child(2) {
+  position: sticky;
+  left: 160px;
+  z-index: 15;
+  background: white;
+}
+
+/* Hari */
+#reportTable th:nth-child(3),
+#reportTable td:nth-child(3) {
+  position: sticky;
+  left: 240px;
+  z-index: 15;
+  background: white;
+}
+
+/* Jam Kerja */
+#reportTable th:nth-child(4),
+#reportTable td:nth-child(4) {
+  position: sticky;
+  left: 320px;
+  z-index: 15;
+  background: white;
+}
+
+/* Jam Lembur */
+#reportTable th:nth-child(5),
+#reportTable td:nth-child(5) {
+  position: sticky;
+  left: 420px;
+  z-index: 15;
+  background: white;
+}
+
+/* Hasil Lembur */
+#reportTable th:nth-child(6),
+#reportTable td:nth-child(6) {
+  position: sticky;
+  left: 520px;
+  z-index: 15;
+  background: white;
+}
+
+/* Jam Awal 1 */
+#reportTable th:nth-child(7),
+#reportTable td:nth-child(7) {
+  position: sticky;
+  left: 640px;
+  z-index: 15;
+  background: white;
+}
+
+/* Jam Akhir 1 */
+#reportTable th:nth-child(8),
+#reportTable td:nth-child(8) {
+  position: sticky;
+  left: 740px;
+  z-index: 15;
+  background: white;
+}
+
+/* Jam Awal 2 */
+#reportTable th:nth-child(9),
+#reportTable td:nth-child(9) {
+  position: sticky;
+  left: 840px;
+  z-index: 15;
+  background: white;
+}
+
+/* Jam Akhir 2 */
+#reportTable th:nth-child(10),
+#reportTable td:nth-child(10) {
+  position: sticky;
+  left: 940px;
+  z-index: 15;
+  background: white;
+}
+
+/* Jam Awal 3 */
+#reportTable th:nth-child(11),
+#reportTable td:nth-child(11) {
+  position: sticky;
+  left: 1040px;
+  z-index: 15;
+  background: white;
+}
+
+/* Jam Akhir 3 */
+#reportTable th:nth-child(12),
+#reportTable td:nth-child(12) {
+  position: sticky;
+  left: 1140px;
+  z-index: 15;
+  background: white;
+
+  /* garis batas freeze */
+  box-shadow: 4px 0 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Header freeze tetap hijau */
+#reportTable thead th:nth-child(1),
+#reportTable thead th:nth-child(2),
+#reportTable thead th:nth-child(3),
+#reportTable thead th:nth-child(4),
+#reportTable thead th:nth-child(5),
+#reportTable thead th:nth-child(6),
+#reportTable thead th:nth-child(7),
+#reportTable thead th:nth-child(8),
+#reportTable thead th:nth-child(9),
+#reportTable thead th:nth-child(10),
+#reportTable thead th:nth-child(11),
+#reportTable thead th:nth-child(12) {
+  background: linear-gradient(135deg, #5c8d59, #4a7c59);
+  z-index: 25;
 }
 
 /* ================= FILTER GROUP ================= */
@@ -1724,32 +1856,78 @@ body {
 
   margin-top: 20px;
 }
-.btn-action {
-  background-color: rgba(76, 175, 80, 0.7);
+/* Tombol Hapus */
+.delete-btn{
+  background:#dc3545;
+  color:#fff;
+  border:none;
+  padding:6px 10px;
+  border-radius:6px;
+  cursor:pointer;
+  font-size:12px;
+  font-weight:bold;
 }
 
-.delete-btn {
-  background: #dc3545;
-
-  color: white;
-
-  border: none;
-
-  padding: 6px 10px;
-
-  border-radius: 6px;
-
-  cursor: pointer;
-
-  font-size: 12px;
-
-  font-weight: bold;
+.delete-btn:hover{
+  background:#bb2d3b;
 }
 
-.delete-btn:hover {
-  background: #bb2d3b;
+/* Tombol Edit */
+.edit-btn{
+  background:#0d6efd;
+  color:#fff;
+  border:none;
+  padding:6px 10px;
+  border-radius:6px;
+  cursor:pointer;
+  font-size:12px;
+  font-weight:bold;
+  margin-left:4px;
 }
 
+.edit-btn:hover{
+  background:#0b5ed7;
+}
+
+/* Tombol Approval */
+.approval-btn{
+  background:#198754;
+  color:#fff;
+  border:none;
+  padding:6px 10px;
+  border-radius:6px;
+  cursor:pointer;
+  font-size:12px;
+  font-weight:bold;
+  margin-left:4px;
+}
+
+.approval-btn:hover{
+  background:#157347;
+}
+
+.save-btn{
+  background:#28a745;
+  color:#fff;
+  border:none;
+  padding:6px 12px;
+  border-radius:5px;
+  cursor:pointer;
+}
+
+.save-btn:hover{
+  opacity:.9;
+}
+
+.approved-row{
+  background:#d4edda !important;
+}
+
+.approved-row td{
+  background:#d4edda !important;
+  color:#155724;
+  font-weight:bold;
+}
 /* ================= HEADER DRIVER ================= */
 
 .driver-header {
@@ -2552,4 +2730,9 @@ body {
 
   font-size:14px;
   font-weight:600;
+}
+
+.edited-row td{
+  color:red !important;
+  font-weight:bold;
 }
