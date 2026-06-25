@@ -27,7 +27,7 @@ const users = {
     role: "field" // hanya KRP FIELD
   },
 
-  "syahrul@devimandiri.com": {
+  "syahrul@pertamina.com": {
     password: "syahrul2026",
     role: "field" // hanya KRP FIELD
   },
@@ -55,7 +55,7 @@ const userPhotos = {
   "ojie@devimandiri.com": "https://i.postimg.cc/wBg2ZtdS/admint.jpg",
   "suharso@pertamina.com": "https://i.postimg.cc/MK0X4cQ7/acok.jpg",
   "anggito@pertamina.com": "https://i.postimg.cc/qR1C6dWC/silvia.png",
-  "syahrul@devimandiri.com": "https://i.postimg.cc/mDDj37mb/sahrul.jpg",
+  "syahrul@pertamina.com": "https://i.postimg.cc/mDDj37mb/sahrul.jpg",
   "revino@devimandiri.com": "https://i.postimg.cc/jdNpJrWL/vino-g.jpg",
   "dian@devimandiri.com": "https://i.postimg.cc/V6mQzZs4/bajil.jpg",
   "rahmat@devimandiri.com": "https://i.postimg.cc/0j4BKVvd/rahmat.jpg"
